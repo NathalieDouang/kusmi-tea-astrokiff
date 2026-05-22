@@ -1100,7 +1100,7 @@ html.lenis body {
 .m-hero {
   position: relative;
   text-align: center;
-  padding: 26px 22px 18px;
+  padding: 34px 22px 30px;
   overflow: hidden;
 }
 .m-hero__deco {
@@ -1121,19 +1121,19 @@ html.lenis body {
 }
 .m-hero__title {
   position: relative;
-  font-size: clamp(30px, 8.5vw, 40px);
+  font-size: clamp(34px, 9.5vw, 46px);
   line-height: 0.98;
   margin: 0 auto;
-  max-width: 340px;
+  max-width: 360px;
 }
 .m-hero__intro {
   position: relative;
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--ink);
-  margin: 16px auto 0;
-  max-width: 320px;
+  margin: 18px auto 0;
+  max-width: 340px;
 }
 .m-hero__intro b {
   font-weight: 600;
@@ -1146,7 +1146,7 @@ html.lenis body {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: 22px 16px 14px;
+  padding: 30px 16px 18px;
   scroll-padding: 0 16px;
   scrollbar-width: none;
 }
@@ -1154,11 +1154,11 @@ html.lenis body {
   display: none;
 }
 .m-slide {
-  flex: 0 0 70%;
+  flex: 0 0 62%;
   scroll-snap-align: center;
 }
 .m-slide--sm {
-  flex: 0 0 46%;
+  flex: 0 0 43%;
 }
 .m-card-frame {
   position: relative;
@@ -1174,7 +1174,7 @@ html.lenis body {
   letter-spacing: 0.9px;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin: 0 0 6px;
+  margin: 4px 0 10px;
 }
 .m-cue--dark {
   color: #e7e7ef;
@@ -1190,13 +1190,13 @@ html.lenis body {
 
 /* generic section helpers */
 .m-section {
-  padding: 46px 22px;
+  padding: 60px 22px;
 }
 .m-section-title {
-  font-size: clamp(26px, 8vw, 34px);
+  font-size: clamp(28px, 8.5vw, 38px);
   line-height: 1.05;
   text-align: center;
-  margin: 0 0 24px;
+  margin: 0 0 26px;
   color: var(--ink);
 }
 .m-eyebrow {
@@ -1216,12 +1216,12 @@ html.lenis body {
 
 /* collaboration */
 .m-collab {
-  padding: 50px 22px 10px;
+  padding: 66px 22px 20px;
 }
 .m-collab__photos {
   display: flex;
   gap: 10px;
-  margin: 0 0 22px;
+  margin: 0 0 26px;
 }
 .m-collab__photos img {
   flex: 1;
@@ -1231,16 +1231,16 @@ html.lenis body {
   border-radius: 10px;
 }
 .m-collab__text p {
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--ink);
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 /* ── ritual mobile ── */
 .m-rhead {
   text-align: center;
-  padding: 18px 22px 40px;
+  padding: 22px 22px 54px;
 }
 .m-rhead__tin {
   margin: 6px 0 14px;
@@ -1282,7 +1282,7 @@ html.lenis body {
 /* ingredients card (flowing glass) */
 .m-ing-card {
   position: relative;
-  margin-top: 34px;
+  margin-top: 44px;
   padding: 30px 22px 28px;
   border-radius: 20px;
   background: rgba(255, 252, 248, 0.5);
@@ -1328,7 +1328,7 @@ html.lenis body {
 /* dark "continuer" section */
 .m-dark {
   background: linear-gradient(180deg, #11132a, #1c1f3d);
-  padding: 50px 0 46px;
+  padding: 64px 0 58px;
   color: #fff;
 }
 .m-dark__title {
@@ -1347,7 +1347,7 @@ html.lenis body {
 /* shared components: tighten for phones */
 @media (max-width: 767px) {
   .faq {
-    padding: 64px 20px 72px;
+    padding: 76px 20px 80px;
   }
   .faq__title {
     font-size: 30px;
