@@ -1474,7 +1474,8 @@ html.lenis body {
     padding-bottom: 80px;
   }
   .faq {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    min-height: 80vh;
+    padding-top: 70px;
+    padding-bottom: 70px;
   }
 }
