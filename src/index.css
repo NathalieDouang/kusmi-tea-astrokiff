@@ -1049,3 +1049,324 @@ html.lenis body {
     animation: none;
   }
 }
+
+/* ============================================================
+   Touch devices — neutralise sticky hover states
+   On a touch screen a :hover "sticks" after a tap. Gate the
+   transform-based hovers so they only apply with a real pointer.
+   ============================================================ */
+@media (hover: none) {
+  .fan .rcard:hover,
+  .related .rcard:hover {
+    transform: none !important;
+    filter: none;
+  }
+  .fan .rcard:hover .rcard__glow,
+  .related .rcard:hover .rcard__glow {
+    opacity: 0;
+  }
+  .rstep:hover {
+    background-color: transparent;
+    padding-left: 58px;
+  }
+  .cta:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Mobile layout (< 768px) — dedicated reflowed phone components
+   ============================================================ */
+.m-page {
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--page-bg);
+}
+
+/* top bar */
+.m-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  gap: 12px;
+}
+.m-topbar__brand img {
+  height: 34px;
+  display: block;
+}
+
+/* hero */
+.m-hero {
+  position: relative;
+  text-align: center;
+  padding: 26px 22px 18px;
+  overflow: hidden;
+}
+.m-hero__deco {
+  position: absolute;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.m-hero__deco--moon {
+  width: 70px;
+  top: 4px;
+  right: -6px;
+  transform: rotate(16deg);
+}
+.m-hero__deco--sun {
+  width: 64px;
+  bottom: 6px;
+  left: -10px;
+}
+.m-hero__title {
+  position: relative;
+  font-size: clamp(30px, 8.5vw, 40px);
+  line-height: 0.98;
+  margin: 0 auto;
+  max-width: 340px;
+}
+.m-hero__intro {
+  position: relative;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 16px auto 0;
+  max-width: 320px;
+}
+.m-hero__intro b {
+  font-weight: 600;
+}
+
+/* horizontal swipeable slider (replaces the desktop card fan) */
+.m-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 22px 16px 14px;
+  scroll-padding: 0 16px;
+  scrollbar-width: none;
+}
+.m-slider::-webkit-scrollbar {
+  display: none;
+}
+.m-slide {
+  flex: 0 0 70%;
+  scroll-snap-align: center;
+}
+.m-slide--sm {
+  flex: 0 0 46%;
+}
+.m-card-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 564 / 927;
+}
+
+/* "swipe / choose a card" cue */
+.m-cue {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 6px;
+}
+.m-cue--dark {
+  color: #e7e7ef;
+}
+.m-cue__arrows {
+  display: block;
+  color: #c8a24c;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+  text-transform: none;
+  font-size: 14px;
+}
+
+/* generic section helpers */
+.m-section {
+  padding: 46px 22px;
+}
+.m-section-title {
+  font-size: clamp(26px, 8vw, 34px);
+  line-height: 1.05;
+  text-align: center;
+  margin: 0 0 24px;
+  color: var(--ink);
+}
+.m-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 0 0 8px;
+}
+.m-cta-block {
+  display: flex;
+  width: max-content;
+  max-width: 90%;
+  margin: 28px auto 0;
+}
+
+/* collaboration */
+.m-collab {
+  padding: 50px 22px 10px;
+}
+.m-collab__photos {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 22px;
+}
+.m-collab__photos img {
+  flex: 1;
+  width: 0;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.m-collab__text p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+
+/* ── ritual mobile ── */
+.m-rhead {
+  text-align: center;
+  padding: 18px 22px 40px;
+}
+.m-rhead__tin {
+  margin: 6px 0 14px;
+}
+.m-rhead__tin img {
+  width: 188px;
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.2));
+}
+.m-rhead__title {
+  font-size: clamp(42px, 15vw, 70px);
+  line-height: 0.82;
+  margin: 0 0 16px;
+}
+.m-rhead__desc {
+  font-size: 15px;
+  line-height: 1.45;
+  margin: 0 auto;
+  max-width: 360px;
+}
+.m-rhead__label {
+  font-size: 21px;
+  margin: 26px 0 12px;
+}
+.m-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* ritual steps in flow */
+.m-ritual .ritual-steps {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ingredients card (flowing glass) */
+.m-ing-card {
+  position: relative;
+  margin-top: 34px;
+  padding: 30px 22px 28px;
+  border-radius: 20px;
+  background: rgba(255, 252, 248, 0.5);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.1);
+}
+.m-ing-card__title {
+  font-size: 38px;
+  margin: 0 0 14px;
+}
+.m-ing-card__rule {
+  display: block;
+  width: 46px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0.85;
+  margin: 0 0 16px;
+}
+.m-ing-card__moment-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 22px 0 8px;
+}
+.m-ing-card__moment {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* mid CTA */
+.m-cta-section {
+  text-align: center;
+}
+.m-cta-title {
+  font-size: clamp(28px, 9vw, 42px);
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* dark "continuer" section */
+.m-dark {
+  background: linear-gradient(180deg, #11132a, #1c1f3d);
+  padding: 50px 0 46px;
+  color: #fff;
+}
+.m-dark__title {
+  font-size: clamp(26px, 8vw, 34px);
+  text-align: center;
+  margin: 0 22px 12px;
+}
+.m-dark__text {
+  font-size: 15px;
+  line-height: 1.45;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 22px 18px;
+}
+
+/* shared components: tighten for phones */
+@media (max-width: 767px) {
+  .faq {
+    padding: 64px 20px 72px;
+  }
+  .faq__title {
+    font-size: 30px;
+    margin-bottom: 26px;
+  }
+  .faq__q {
+    font-size: 16px;
+    padding: 20px 4px;
+    gap: 16px;
+  }
+  .home-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    padding: 30px 22px 40px;
+  }
+  .cta--lg {
+    font-size: 18px;
+    padding: 11px 30px;
+  }
+}
