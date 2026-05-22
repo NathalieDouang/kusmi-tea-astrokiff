@@ -909,9 +909,24 @@ html.lenis body {
   font-size: 16px;
   color: var(--ink);
 }
-.home-footer__links p {
+.home-footer__links p,
+.home-footer__links a {
+  display: block;
   margin: 0;
   line-height: 1.7;
+  color: inherit;
+}
+.home-footer__brand {
+  cursor: pointer;
+}
+.home-footer__links a,
+.footer-link {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.home-footer__links a:hover,
+.footer-link:hover {
+  color: rgba(74, 122, 200, 1);
 }
 
 .page-enter {

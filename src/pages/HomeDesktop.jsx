@@ -8,6 +8,7 @@ import { smoothScrollTo } from "../lib/lenis.js";
 import SiteHeader from "../components/SiteHeader.jsx";
 import FaqSection from "../components/FaqSection.jsx";
 import ReviewsSection from "../components/ReviewsSection.jsx";
+import HomeFooter from "../components/HomeFooter.jsx";
 import RitualCard from "../components/RitualCard.jsx";
 import CropImage from "../components/CropImage.jsx";
 import { rituals, fanLayout } from "../data/rituals.js";
@@ -120,7 +121,7 @@ export default function HomeDesktop() {
           style={{ left: 666, top: 962, width: 394, height: 220 }} />
 
         {/* card fan */}
-        <div className="fan">
+        <div className="fan" id="rituels">
           {rituals.map((r, i) => {
             const f = fanLayout[r.slug];
             const depth = Math.abs(i - 2);
@@ -173,7 +174,7 @@ export default function HomeDesktop() {
         </p>
 
         {/* ── Collaboration section ── */}
-        <h2 className="abs display reveal" style={{ left: 114, top: 1514, width: 530, fontSize: 48 }}>
+        <h2 id="collaboration" className="abs display reveal" style={{ left: 114, top: 1514, width: 530, fontSize: 48 }}>
           Traduire les énergies en infusion
         </h2>
         <div
@@ -194,10 +195,11 @@ export default function HomeDesktop() {
         </div>
         <div className="abs" style={{ left: 114, top: 1828, display: "flex", alignItems: "center", gap: 26 }}>
           <a
-            href="#"
+            href="https://www.kusmitea.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="cta cta--home"
             style={{ background: HOME_CTA }}
-            onClick={(e) => e.preventDefault()}
           >
             COMMANDER
           </a>
@@ -242,15 +244,7 @@ export default function HomeDesktop() {
     <div className="home-lower">
       <ReviewsSection />
       <FaqSection />
-      <footer className="home-footer">
-        <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />
-        <div className="home-footer__links">
-          <p>Les rituels</p>
-          <p>La collaboration</p>
-          <p>Mentions légales</p>
-        </div>
-        <p className="home-footer__copy">Kusmi Tea × Astrokiff — 2026</p>
-      </footer>
+      <HomeFooter />
     </div>
     </>
   );

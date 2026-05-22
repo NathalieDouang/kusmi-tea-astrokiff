@@ -1,6 +1,7 @@
 import { usePageTransition } from "../components/PageTransition.jsx";
 import FaqSection from "../components/FaqSection.jsx";
 import ReviewsSection from "../components/ReviewsSection.jsx";
+import HomeFooter from "../components/HomeFooter.jsx";
 import RitualCard from "../components/RitualCard.jsx";
 import { rituals } from "../data/rituals.js";
 
@@ -19,7 +20,7 @@ export default function HomeMobile() {
         <a href="/" className="m-topbar__brand" onClick={(e) => { e.preventDefault(); go("/"); }}>
           <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />
         </a>
-        <a href="#" className="cta cta--nav" style={{ background: HOME_CTA }} onClick={(e) => e.preventDefault()}>
+        <a href="https://www.kusmitea.com/" target="_blank" rel="noopener noreferrer" className="cta cta--nav" style={{ background: HOME_CTA }}>
           COMMANDER
         </a>
       </header>
@@ -34,7 +35,7 @@ export default function HomeMobile() {
       </section>
 
       {/* swipeable card slider (replaces the desktop fan) */}
-      <div className="m-slider" role="list" aria-label="Les cinq rituels">
+      <div className="m-slider" id="rituels" role="list" aria-label="Les cinq rituels">
         {rituals.map((r) => (
           <div className="m-slide" role="listitem" key={r.slug}>
             <div className="m-card-frame">
@@ -53,7 +54,7 @@ export default function HomeMobile() {
       </p>
 
       {/* collaboration */}
-      <section className="m-collab">
+      <section className="m-collab" id="collaboration">
         <h2 className="display m-section-title">Traduire les énergies en infusion</h2>
         <div className="m-collab__photos">
           <img src="/assets/decor/photo-1.png" alt="Astrokiff" />
@@ -71,7 +72,7 @@ export default function HomeMobile() {
             l’astrologie comme langage émotionnel et intuitif.
           </p>
         </div>
-        <a href="#" className="cta cta--lg m-cta-block" style={{ background: HOME_CTA }} onClick={(e) => e.preventDefault()}>
+        <a href="https://www.kusmitea.com/" target="_blank" rel="noopener noreferrer" className="cta cta--lg m-cta-block" style={{ background: HOME_CTA }}>
           COMMANDER
         </a>
       </section>
@@ -80,15 +81,7 @@ export default function HomeMobile() {
 
       <FaqSection />
 
-      <footer className="home-footer">
-        <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />
-        <div className="home-footer__links">
-          <p>Les rituels</p>
-          <p>La collaboration</p>
-          <p>Mentions légales</p>
-        </div>
-        <p className="home-footer__copy">Kusmi Tea × Astrokiff — 2026</p>
-      </footer>
+      <HomeFooter />
     </div>
   );
 }

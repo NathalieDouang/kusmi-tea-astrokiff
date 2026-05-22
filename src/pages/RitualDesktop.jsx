@@ -258,9 +258,9 @@ export default function RitualDesktop() {
           Faire entrer le rituel dans votre quotidien
         </h2>
         <div className="abs" style={{ left: 0, top: 1632 + offC, width: 1280, display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
-          <button className="cta cta--lg" style={{ background: cta }} onClick={(e) => e.preventDefault()}>
+          <a className="cta cta--lg" href="https://www.kusmitea.com/" target="_blank" rel="noopener noreferrer" style={{ background: cta }}>
             COMMANDER
-          </button>
+          </a>
           <button type="button" className="cta-ghost" onClick={() => go("/#faq")}>
             <span className="cta-ghost__text">Une question ? Consultez la FAQ</span>
             <svg width="16" height="11" viewBox="0 0 16 11" fill="none" aria-hidden="true">

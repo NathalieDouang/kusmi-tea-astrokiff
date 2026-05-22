@@ -1,8 +1,16 @@
+import { usePageTransition } from "./PageTransition.jsx";
+
 /**
  * Page footer. Positioned absolutely inside the ritual/home stages, so it takes
  * a `top` (design-space y) plus a divider line image and ink color.
+ * Logo → home, "Les rituels" → home cards, "La collaboration" → collab section.
  */
 export default function SiteFooter({ top, lineSrc, ink = "#000", bg = "#F6F1F0" }) {
+  const go = usePageTransition();
+  const nav = (path) => (e) => {
+    e.preventDefault();
+    go(path);
+  };
   return (
     <>
       {/* footer background band (full-width) */}
@@ -19,25 +27,26 @@ export default function SiteFooter({ top, lineSrc, ink = "#000", bg = "#F6F1F0" 
         alt=""
         style={{ left: 0, top, width: 1280, height: 1 }}
       />
-      <img
-        className="abs"
-        src="/assets/logo.png"
-        alt="Kusmi Tea × Astrokiff"
-        style={{ left: 124, top: top + 26, height: 52 }}
-      />
+      <a className="abs" href="/" onClick={nav("/")} style={{ left: 124, top: top + 26 }}>
+        <img
+          src="/assets/logo.png"
+          alt="Kusmi Tea × Astrokiff"
+          style={{ height: 52, display: "block" }}
+        />
+      </a>
       <div
         className="abs body"
         style={{
           left: 474,
           top: top + 15,
-          width: 177,
+          width: 200,
           fontSize: 16,
           lineHeight: 1.6,
           color: ink,
         }}
       >
-        <p>Les rituels</p>
-        <p>La collaboration</p>
+        <p><a className="footer-link" href="/#rituels" onClick={nav("/#rituels")}>Les rituels</a></p>
+        <p><a className="footer-link" href="/#collaboration" onClick={nav("/#collaboration")}>La collaboration</a></p>
         <p>Mentions légales</p>
       </div>
       <p

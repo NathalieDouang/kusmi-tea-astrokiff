@@ -1,6 +1,7 @@
 import { useParams, Navigate } from "react-router-dom";
 import { usePageTransition } from "../components/PageTransition.jsx";
 import RitualCard from "../components/RitualCard.jsx";
+import HomeFooter from "../components/HomeFooter.jsx";
 import { ritualsBySlug, relatedRituals } from "../data/rituals.js";
 
 function rgba79(hex) {
@@ -24,7 +25,7 @@ export default function RitualMobile() {
         <a href="/" className="m-topbar__brand" onClick={(e) => { e.preventDefault(); go("/"); }}>
           <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />
         </a>
-        <a href="#" className="cta cta--nav" style={{ background: cta }} onClick={(e) => e.preventDefault()}>
+        <a href="https://www.kusmitea.com/" target="_blank" rel="noopener noreferrer" className="cta cta--nav" style={{ background: cta }}>
           COMMANDER
         </a>
       </header>
@@ -82,7 +83,7 @@ export default function RitualMobile() {
       {/* mid CTA */}
       <section className="m-section m-cta-section" style={{ background: theme.tint }}>
         <h2 className="display m-cta-title">Faire entrer le rituel dans votre quotidien</h2>
-        <a href="#" className="cta cta--lg m-cta-block" style={{ background: cta }} onClick={(e) => e.preventDefault()}>
+        <a href="https://www.kusmitea.com/" target="_blank" rel="noopener noreferrer" className="cta cta--lg m-cta-block" style={{ background: cta }}>
           COMMANDER
         </a>
         <button type="button" className="cta-ghost m-faq-link" onClick={() => go("/#faq")}>
@@ -115,15 +116,7 @@ export default function RitualMobile() {
         </p>
       </section>
 
-      <footer className="home-footer">
-        <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />
-        <div className="home-footer__links">
-          <p>Les rituels</p>
-          <p>La collaboration</p>
-          <p>Mentions légales</p>
-        </div>
-        <p className="home-footer__copy">Kusmi Tea × Astrokiff — 2026</p>
-      </footer>
+      <HomeFooter />
     </div>
   );
 }

@@ -16,10 +16,11 @@ export default function SiteHeader({ ctaBg }) {
         <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" style={{ height: 46, display: "block" }} />
       </a>
       <a
-        href="#"
+        href="https://www.kusmitea.com/"
+        target="_blank"
+        rel="noopener noreferrer"
         className="cta cta--nav nav__cta"
         style={{ background: ctaBg }}
-        onClick={(e) => e.preventDefault()}
       >
         COMMANDER
       </a>
