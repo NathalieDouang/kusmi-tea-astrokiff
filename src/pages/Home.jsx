@@ -50,7 +50,7 @@ export default function Home() {
           zIndex: 0,
         }}
       />
-      <Stage width={1280} height={1880} background="transparent">
+      <Stage width={1280} height={1910} background="transparent">
         <div ref={scopeRef} className="page-enter">
         <SiteHeader ctaBg={HOME_CTA} />
 
@@ -170,12 +170,12 @@ export default function Home() {
         </p>
 
         {/* ── Collaboration section ── */}
-        <h2 className="abs display reveal" style={{ left: 114, top: 1374, width: 530, fontSize: 48 }}>
+        <h2 className="abs display reveal" style={{ left: 114, top: 1404, width: 530, fontSize: 48 }}>
           Traduire les énergies en infusion
         </h2>
         <div
           className="abs body reveal"
-          style={{ left: 118, top: 1451, width: 534, fontSize: 16, lineHeight: 1.45 }}
+          style={{ left: 118, top: 1481, width: 460, fontSize: 16, lineHeight: 1.45 }}
         >
           <p style={{ marginBottom: 16 }}>
             Kusmi Tea et Astrokiff s’unissent autour d’une vision commune : transformer les
@@ -189,7 +189,7 @@ export default function Home() {
             émotionnel et intuitif.
           </p>
         </div>
-        <div className="abs" style={{ left: 114, top: 1643, display: "flex", alignItems: "center", gap: 26 }}>
+        <div className="abs" style={{ left: 114, top: 1718, display: "flex", alignItems: "center", gap: 26 }}>
           <a
             href="#"
             className="cta cta--home"
@@ -212,21 +212,21 @@ export default function Home() {
         </div>
 
         {/* collab imagery */}
-        <div className="abs" data-mouse="10" style={{ left: 955, top: 1384, width: 333, height: 431 }}>
+        <div className="abs" data-mouse="10" style={{ left: 955, top: 1414, width: 333, height: 431 }}>
           <img src="/assets/decor/flower-header-orange.png" alt=""
             style={{ width: 284, height: 397, margin: "0 auto", transform: "rotate(7.58deg)" }} />
         </div>
         <img className="abs reveal" src="/assets/decor/photo-1.png" alt="Astrokiff"
-          style={{ left: 707, top: 1370, width: 236, height: 354, borderRadius: 10, objectFit: "cover" }} />
+          style={{ left: 707, top: 1400, width: 236, height: 354, borderRadius: 10, objectFit: "cover" }} />
         <img className="abs reveal" src="/assets/decor/photo-2.png" alt=""
-          style={{ left: 955, top: 1371, width: 222, height: 177, borderRadius: 10, objectFit: "cover" }} />
+          style={{ left: 955, top: 1401, width: 222, height: 177, borderRadius: 10, objectFit: "cover" }} />
         <img className="abs reveal" src="/assets/decor/photo-3.png" alt=""
-          style={{ left: 955, top: 1556, width: 222, height: 167, borderRadius: 10, objectFit: "cover" }} />
+          style={{ left: 955, top: 1586, width: 222, height: 167, borderRadius: 10, objectFit: "cover" }} />
         <img className="abs" data-mouse="-8" src="/assets/decor/flower-collab.png" alt=""
-          style={{ left: 641, top: 1271, width: 200, height: 200 }} />
+          style={{ left: 641, top: 1301, width: 200, height: 200 }} />
         <CropImage
           src="/assets/decor/star-deco.png"
-          box={{ left: 473, top: 1670, w: 176, h: 132 }}
+          box={{ left: 473, top: 1700, w: 176, h: 132 }}
           crop={{ w: "512%", h: "455.11%", left: "-73%", top: "-151.11%" }}
           parallax={{ mouse: 14 }}
           className="twinkle twinkle--fast"
