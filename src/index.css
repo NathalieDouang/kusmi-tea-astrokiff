@@ -1,0 +1,1017 @@
+/* ============================================================
+   Kusmi Tea × Astrokiff — global styles & design tokens
+   ============================================================ */
+
+@font-face {
+  font-family: "Erangle";
+  src: url("/fonts/erangle.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --page-bg: #f6f1f0;
+  --ink: #000000;
+  --ink-soft: #575757;
+  --night: #11132a;
+
+  --font-display: "Erangle", "Cormorant Garamond", serif;
+  --font-label: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Barlow", system-ui, -apple-system, sans-serif;
+
+  /* design space → real px scale, set by <Stage> */
+  --stage-scale: 1;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+::selection {
+  background: #d9c9a0;
+  color: var(--night);
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Stage — scales a 1280px design space to fit the viewport
+   ============================================================ */
+.stage-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.stage {
+  position: relative;
+  width: 1280px;
+  margin: 0 auto;
+  transform-origin: top left;
+  transform: scale(var(--stage-scale, 1));
+}
+
+.abs {
+  position: absolute;
+}
+
+/* ============================================================
+   Typography helpers
+   ============================================================ */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+.label-serif {
+  font-family: var(--font-label);
+  font-style: italic;
+  margin: 0;
+}
+.body {
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+/* ============================================================
+   CTA buttons
+   ============================================================ */
+.cta {
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+  white-space: nowrap;
+}
+.cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+  filter: brightness(1.05);
+}
+.cta--nav {
+  padding: 9px 21px;
+  font-size: 14px;
+}
+.cta--lg {
+  padding: 10px 35px;
+  font-size: 22px;
+}
+.cta--home {
+  padding: 14px 42px;
+  font-size: 22px;
+}
+
+/* light secondary "ghost" link button */
+.cta-ghost {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  transition: color 0.35s ease, gap 0.35s ease;
+}
+.cta-ghost svg {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cta-ghost__text {
+  position: relative;
+}
+.cta-ghost__text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cta-ghost:hover {
+  color: rgba(74, 122, 200, 1);
+  gap: 12px;
+}
+.cta-ghost:hover svg {
+  transform: translateY(-3px);
+}
+.cta-ghost:hover .cta-ghost__text::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   Site chrome
+   ============================================================ */
+.nav {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 95px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav__brand {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.02em;
+}
+.nav__cta {
+  position: absolute;
+  right: 45px;
+  top: 29px;
+}
+
+/* outline tags — border + text in the ritual colour, transparent fill */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 15px;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Ritual card (homepage fan + related grid)
+   ============================================================ */
+.rcard {
+  position: relative;
+  border-radius: 12px;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+}
+.rcard__face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.25);
+}
+.rcard__title,
+.rcard__sub {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.rcard__title {
+  top: 11.5%;
+  width: 58%;
+}
+.rcard__sub {
+  bottom: 11%;
+  width: 48%;
+}
+.rcard__glow {
+  position: absolute;
+  inset: -6%;
+  border-radius: 16px;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 244, 214, 0.55),
+    rgba(255, 244, 214, 0) 70%
+  );
+  transition: opacity 0.5s ease;
+}
+.fan .rcard:hover {
+  transform: translateY(-26px) scale(1.06) rotate(0deg) !important;
+  z-index: 50 !important;
+  filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.3));
+}
+.fan .rcard:hover .rcard__glow {
+  opacity: 1;
+}
+.related .rcard:hover {
+  transform: translateY(-14px) scale(1.04);
+  filter: drop-shadow(0 20px 26px rgba(0, 0, 0, 0.4));
+}
+.related .rcard:hover .rcard__glow {
+  opacity: 0.85;
+}
+
+.ing-card {
+  /* frosted glass (Apple-style) — lets the orbit & stars blur through */
+  background: rgba(255, 252, 248, 0.3);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-radius: 21px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+  will-change: transform;
+}
+.ing-card::before {
+  /* soft sheen that follows the cursor (sits below the text) */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.5),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.ing-card:hover {
+  box-shadow: 0 30px 64px rgba(0, 0, 0, 0.18), 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+.ing-card:hover::before {
+  opacity: 1;
+}
+.ing-card__rule {
+  position: absolute;
+  left: 39px;
+  top: 120px;
+  width: 46px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0.85;
+}
+.ing-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+.ing-row:last-child {
+  border-bottom: none;
+}
+.ing-pct {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  min-width: 44px;
+}
+.ing-name {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.ing-origin {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+.ing-marker {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 9px;
+  vertical-align: middle;
+  background: var(--accent);
+}
+
+/* ── subtle astrology backdrop (behind ritual content) ── */
+.ritual-backdrop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+/* light shooting stars descending behind the ritual steps */
+.shooting-star {
+  position: absolute;
+  z-index: 0;
+  width: 110px;
+  height: 2px;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--accent) 75%, transparent)
+  );
+  animation: shoot 8s ease-in infinite;
+}
+.shooting-star::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--ang, 32deg)) translateX(-50px);
+  }
+  4% {
+    opacity: 0.85;
+  }
+  17% {
+    opacity: 0;
+    transform: rotate(var(--ang, 32deg)) translateX(270px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--ang, 32deg)) translateX(270px);
+  }
+}
+
+/* elegant orbital system behind section 2 */
+.orbit-system {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+.orbit-ring,
+.orbit-rotor,
+.orbit-planet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+}
+.orbit-ring {
+  transform: translate(-50%, -50%);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.orbit-ring--outer {
+  width: 100%;
+  height: 100%;
+}
+.orbit-ring--mid {
+  width: 60%;
+  height: 60%;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  transform-origin: 50% 50%;
+  animation: orbit-spin 90s linear infinite;
+}
+.orbit-ring--inner {
+  width: 38%;
+  height: 38%;
+  border-color: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.orbit-ring--dotted {
+  width: 82%;
+  height: 82%;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% 50%;
+  border: 1px dashed color-mix(in srgb, var(--accent) 22%, transparent);
+  animation: orbit-spin 70s linear infinite reverse;
+}
+.orbit-planet {
+  width: 14%;
+  height: 14%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle at 38% 34%,
+    color-mix(in srgb, var(--accent) 60%, transparent),
+    color-mix(in srgb, var(--accent) 14%, transparent) 68%,
+    transparent 72%
+  );
+  box-shadow: 0 0 46px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+.orbit-rotor {
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+}
+.orbit-rotor--outer {
+  width: 100%;
+  height: 100%;
+  animation: orbit-spin 64s linear infinite;
+}
+.orbit-rotor--dotted {
+  width: 82%;
+  height: 82%;
+  animation: orbit-spin 80s linear infinite;
+}
+.orbit-rotor--mid {
+  width: 60%;
+  height: 60%;
+  animation: orbit-spin 38s linear infinite reverse;
+}
+.orbit-rotor--inner {
+  width: 38%;
+  height: 38%;
+  animation: orbit-spin 24s linear infinite;
+}
+.orbit-body {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.orbit-body--sm {
+  width: 9px;
+  height: 9px;
+}
+@keyframes orbit-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.rb-tw {
+  animation: rb-twinkle 5s ease-in-out infinite;
+}
+@keyframes rb-twinkle {
+  0%,
+  100% {
+    opacity: 0.06;
+  }
+  50% {
+    opacity: 0.24;
+  }
+}
+
+/* ── ritual steps: celestial interactive timeline ── */
+.ritual-steps {
+  position: relative;
+}
+.ritual-steps::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 26px;
+  bottom: 26px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--accent) 50%, transparent),
+    transparent
+  );
+}
+.rstep {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 14px 15px 58px;
+  border-radius: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.4s ease,
+    padding 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rstep:first-child {
+  border-top: none;
+}
+.rstep__num {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  background: var(--step-bg, #fff);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  transition: background-color 0.4s ease, color 0.4s ease,
+    border-color 0.4s ease, box-shadow 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rstep__title {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: color 0.35s ease;
+}
+.rstep__tag {
+  font-family: var(--font-body);
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.6;
+  white-space: nowrap;
+  transition: color 0.35s ease, opacity 0.35s ease;
+}
+.rstep:hover {
+  background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+  padding-left: 64px;
+}
+.rstep:hover .rstep__num {
+  background-color: var(--accent);
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.rstep:hover .rstep__title {
+  color: var(--accent);
+}
+.rstep:hover .rstep__tag {
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* ── home lower flowing area: FAQ + footer (cream) ── */
+.home-lower {
+  background: #f6f1f0;
+}
+.faq {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 130px 28px 110px;
+}
+.faq__title {
+  text-align: center;
+  font-size: 48px;
+  margin: 0 0 38px;
+  color: var(--ink);
+}
+.faq__item {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.faq__item:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 24px 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--ink);
+  transition: color 0.3s ease;
+}
+.faq__q:hover {
+  color: rgba(74, 122, 200, 1);
+}
+.faq__icon {
+  flex-shrink: 0;
+  color: #c8a24c;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.faq__item.open .faq__icon {
+  transform: rotate(180deg);
+}
+.faq__a {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+.faq__item.open .faq__a {
+  max-height: 260px;
+  opacity: 1;
+}
+.faq__a p {
+  margin: 0;
+  padding: 0 6px 26px;
+  max-width: 660px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.home-footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 26px 28px 46px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.home-footer img {
+  height: 50px;
+  display: block;
+}
+.home-footer__links,
+.home-footer__copy {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink);
+}
+.home-footer__links p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.page-enter {
+  animation: pageFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Premium "reveal" cursor (see RevealCursor.jsx)
+   ------------------------------------------------------------
+   Three nested levels so mouse-follow, appearance-scale and the
+   text rotation never fight over the same `transform`:
+     .reveal-cursor        → niveau 1, translate(x,y) set by JS
+     .reveal-cursor__inner → niveau 2, centering + scale on hover
+     .reveal-cursor__ring  → niveau 3, continuous rotation
+   ============================================================ */
+.reveal-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 9999;
+  pointer-events: none;
+  /* transform: translate(x,y) — applied by JS each frame (follow only) */
+}
+.reveal-cursor__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  color: #fff;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1),
+    opacity 0.5s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+.reveal-cursor__inner.is-active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+.reveal-cursor__disc {
+  position: absolute;
+  inset: 16px;
+  border-radius: 50%;
+  background: rgba(20, 22, 42, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(2px);
+}
+/* niveau 3 : seule l'étoile orbite — le wrapper tourne, l'étoile est posée en haut */
+.reveal-cursor__orbit {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  animation: reveal-spin var(--reveal-spin, 7s) linear infinite; /* durée de l'orbite */
+}
+.reveal-cursor__star {
+  position: absolute;
+  top: 6px; /* rayon de l'orbite ≈ 60 - 6 = 54px */
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 4px rgba(255, 244, 214, 0.9));
+}
+/* texte central statique (aucune rotation) */
+.reveal-cursor__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-family: var(--font-label);
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+@keyframes reveal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* hide the native cursor only over reveal targets */
+[data-reveal] {
+  cursor: none;
+}
+
+/* ============================================================
+   Stardust cursor (see StardustCursor.jsx)
+   - .cursor-star        → niveau 1, translate(x,y) (suit la souris)
+   - .cursor-star__icon  → niveau 2, centrage + masquage sur cartes
+   - svg                 → niveau 3, rotation lente
+   - .stardust           → particules de traînée (recyclées)
+   ============================================================ */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+.cursor-star {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 9998;
+  pointer-events: none;
+}
+.cursor-star__icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  color: #c8a24c;
+  filter: drop-shadow(0 0 6px rgba(216, 199, 154, 0.95));
+  transition: opacity 0.25s ease;
+}
+.cursor-star__icon.is-hidden {
+  opacity: 0;
+}
+.cursor-star__icon svg {
+  display: block;
+  animation: cursor-spin 6s linear infinite;
+}
+.stardust-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  overflow: hidden;
+}
+.stardust {
+  position: fixed;
+  width: var(--sz, 6px);
+  height: var(--sz, 6px);
+  margin: calc(var(--sz, 6px) / -2) 0 0 calc(var(--sz, 6px) / -2);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--col, #d8c79a) 0%, rgba(216, 199, 154, 0) 70%);
+  pointer-events: none;
+  animation: stardust-fall 0.75s ease-out forwards;
+}
+@keyframes cursor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes stardust-fall {
+  0% {
+    opacity: 0.95;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 0), var(--dy, 12px)) scale(0.2) rotate(var(--rot, 0deg));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor-star__icon svg {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   Astro micro-animations
+   ============================================================ */
+/* gentle twinkle (opacity only → safe alongside JS parallax transforms) */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: var(--tw-min, 0.6);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+.twinkle--slow {
+  animation-duration: 5.5s;
+}
+.twinkle--fast {
+  animation-duration: 3s;
+}
+.twinkle--delay {
+  animation-delay: 1.3s;
+}
+.twinkle--delay2 {
+  animation-delay: 2.4s;
+}
+
+/* minimal route-transition veil (see PageTransition.jsx) */
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  background: #f6f1f0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* scroll reveal — hidden state only applied once JS adds .has-reveal */
+.has-reveal .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.has-reveal .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* light pulsing gold halo around the COMMANDER buttons */
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 15px 1px rgba(255, 226, 170, 0.55);
+  opacity: 0.25;
+  z-index: -1;
+  pointer-events: none;
+  animation: halo-pulse 3.4s ease-in-out infinite;
+  transition: box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.55s ease;
+}
+.cta:hover::after {
+  box-shadow: 0 0 32px 6px rgba(255, 226, 170, 0.85);
+}
+@keyframes halo-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* "look up at the cards" cue — a small chevron that bobs upward */
+@keyframes arrow-bob {
+  0%,
+  100% {
+    transform: translateY(2px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.scroll-cue {
+  display: block;
+  animation: arrow-bob 1.9s ease-in-out infinite;
+  color: #c8a24c;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rcard,
+  .cta {
+    transition: none;
+  }
+  .reveal-cursor__ring,
+  .twinkle,
+  .scroll-cue,
+  .cta::after,
+  .rb-tw,
+  .orbit-rotor,
+  .orbit-ring--dotted,
+  .orbit-ring--mid,
+  .shooting-star {
+    animation: none;
+  }
+}
