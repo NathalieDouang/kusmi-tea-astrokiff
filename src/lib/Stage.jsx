@@ -30,6 +30,14 @@ export default function Stage({ width = 1280, height, background, fill = false, 
       }
       stage.style.setProperty("--stage-scale", scale);
       wrap.style.height = `${height * scale}px`;
+      // Centre the *scaled* canvas. `transform: scale` keeps the 1280px layout
+      // width, so margin:auto would centre the unscaled box and leave the
+      // (smaller) visible content off to the left — compute the offset instead.
+      if (!fill) {
+        const offset = Math.max(0, (avail - width * scale) / 2);
+        stage.style.marginLeft = `${offset}px`;
+        stage.style.marginRight = "0px";
+      }
     };
 
     apply();
