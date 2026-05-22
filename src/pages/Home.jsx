@@ -41,16 +41,18 @@ export default function Home() {
           top: 0,
           left: 0,
           width: "100vw",
-          height: "min(1000px, 78.125vw)",
+          height: "min(1180px, 92vw)",
           opacity: 0.85,
           backgroundImage: "url(/assets/decor/wallpaper-header.png)",
           backgroundSize: "cover",
           backgroundPosition: "center top",
           pointerEvents: "none",
           zIndex: 0,
+          maskImage: "linear-gradient(to bottom, #000 60%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, #000 60%, transparent 100%)",
         }}
       />
-      <Stage width={1280} height={1910} background="transparent">
+      <Stage width={1280} height={2020} background="transparent">
         <div ref={scopeRef} className="page-enter">
         <SiteHeader ctaBg={HOME_CTA} />
 
@@ -103,17 +105,17 @@ export default function Home() {
 
         {/* clouds + cherubs — straddle the seam (header bg ends ~y1000, next
             section starts ~y1154) so the two backgrounds blend invisibly */}
-        <img className="abs" data-par="-0.03" data-mouse="10" src="/assets/decor/cloud-2.png" alt=""
+        <img className="abs" data-par="0.13" data-mouse="10" src="/assets/decor/cloud-2.png" alt=""
           style={{ left: 190, top: 870, width: 880, height: 330 }} />
-        <img className="abs" data-par="-0.02" data-mouse="14" src="/assets/decor/cloud-3.png" alt=""
+        <img className="abs" data-par="0.11" data-mouse="14" src="/assets/decor/cloud-3.png" alt=""
           style={{ left: 900, top: 760, width: 660, height: 550, opacity: 0.8 }} />
-        <img className="abs" data-par="-0.04" data-mouse="8" src="/assets/decor/cloud-1.png" alt=""
+        <img className="abs" data-par="0.16" data-mouse="8" src="/assets/decor/cloud-1.png" alt=""
           style={{ left: -320, top: 740, width: 740, height: 617, opacity: 0.7 }} />
 
-        {/* cherubs */}
-        <img className="abs" data-mouse="-12" src="/assets/decor/cherub-1.png" alt=""
+        {/* cherubs — nearer layer, lag less than the clouds */}
+        <img className="abs" data-par="0.06" data-mouse="-12" src="/assets/decor/cherub-1.png" alt=""
           style={{ left: 175, top: 1000, width: 218, height: 138 }} />
-        <img className="abs" data-mouse="-16" src="/assets/decor/cherub-2.png" alt=""
+        <img className="abs" data-par="0.04" data-mouse="-16" src="/assets/decor/cherub-2.png" alt=""
           style={{ left: 666, top: 962, width: 394, height: 220 }} />
 
         {/* card fan */}
@@ -170,12 +172,12 @@ export default function Home() {
         </p>
 
         {/* ── Collaboration section ── */}
-        <h2 className="abs display reveal" style={{ left: 114, top: 1404, width: 530, fontSize: 48 }}>
+        <h2 className="abs display reveal" style={{ left: 114, top: 1514, width: 530, fontSize: 48 }}>
           Traduire les énergies en infusion
         </h2>
         <div
           className="abs body reveal"
-          style={{ left: 118, top: 1481, width: 460, fontSize: 16, lineHeight: 1.45 }}
+          style={{ left: 118, top: 1591, width: 460, fontSize: 16, lineHeight: 1.45 }}
         >
           <p style={{ marginBottom: 16 }}>
             Kusmi Tea et Astrokiff s’unissent autour d’une vision commune : transformer les
@@ -189,7 +191,7 @@ export default function Home() {
             émotionnel et intuitif.
           </p>
         </div>
-        <div className="abs" style={{ left: 114, top: 1718, display: "flex", alignItems: "center", gap: 26 }}>
+        <div className="abs" style={{ left: 114, top: 1828, display: "flex", alignItems: "center", gap: 26 }}>
           <a
             href="#"
             className="cta cta--home"
@@ -212,21 +214,21 @@ export default function Home() {
         </div>
 
         {/* collab imagery */}
-        <div className="abs" data-mouse="10" style={{ left: 955, top: 1414, width: 333, height: 431 }}>
+        <div className="abs" data-mouse="10" style={{ left: 955, top: 1524, width: 333, height: 431 }}>
           <img src="/assets/decor/flower-header-orange.png" alt=""
             style={{ width: 284, height: 397, margin: "0 auto", transform: "rotate(7.58deg)" }} />
         </div>
         <img className="abs reveal" src="/assets/decor/photo-1.png" alt="Astrokiff"
-          style={{ left: 707, top: 1400, width: 236, height: 354, borderRadius: 10, objectFit: "cover" }} />
+          style={{ left: 707, top: 1510, width: 236, height: 354, borderRadius: 10, objectFit: "cover" }} />
         <img className="abs reveal" src="/assets/decor/photo-2.png" alt=""
-          style={{ left: 955, top: 1401, width: 222, height: 177, borderRadius: 10, objectFit: "cover" }} />
+          style={{ left: 955, top: 1511, width: 222, height: 177, borderRadius: 10, objectFit: "cover" }} />
         <img className="abs reveal" src="/assets/decor/photo-3.png" alt=""
-          style={{ left: 955, top: 1586, width: 222, height: 167, borderRadius: 10, objectFit: "cover" }} />
+          style={{ left: 955, top: 1696, width: 222, height: 167, borderRadius: 10, objectFit: "cover" }} />
         <img className="abs" data-mouse="-8" src="/assets/decor/flower-collab.png" alt=""
-          style={{ left: 641, top: 1301, width: 200, height: 200 }} />
+          style={{ left: 641, top: 1411, width: 200, height: 200 }} />
         <CropImage
           src="/assets/decor/star-deco.png"
-          box={{ left: 473, top: 1700, w: 176, h: 132 }}
+          box={{ left: 473, top: 1810, w: 176, h: 132 }}
           crop={{ w: "512%", h: "455.11%", left: "-73%", top: "-151.11%" }}
           parallax={{ mouse: 14 }}
           className="twinkle twinkle--fast"

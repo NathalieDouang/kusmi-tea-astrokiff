@@ -24,11 +24,33 @@ const FAQ = [
   },
 ];
 
+const SPARK =
+  "M0,-6 C0.9,-1.8 1.8,-0.9 6,0 C1.8,0.9 0.9,1.8 0,6 C-0.9,1.8 -1.8,0.9 -6,0 C-1.8,-0.9 -0.9,-1.8 0,-6 Z";
+
+// scattered sparkles: [x%, y%, size px, twinkle delay (null = static)]
+const SPARKS = [
+  [6, 14, 16, 0], [93, 9, 13, 1.4], [13, 42, 12, null], [88, 40, 15, 0.7],
+  [4, 68, 14, 2.2], [95, 64, 12, 1.1], [9, 90, 13, 0.4], [91, 92, 16, 1.9],
+  [50, 6, 11, 2.6], [46, 96, 12, null], [76, 24, 11, 0.9], [24, 76, 12, 1.6],
+];
+
 export default function FaqSection() {
   const [open, setOpen] = useState(0);
 
   return (
     <section className="faq" aria-label="Questions fréquentes">
+      <div className="faq__bg" aria-hidden="true">
+        {SPARKS.map(([x, y, s, d], i) => (
+          <svg
+            key={i}
+            className={`faq-spark${d != null ? " faq-tw" : ""}`}
+            viewBox="-7 -7 14 14"
+            style={{ left: `${x}%`, top: `${y}%`, width: s, height: s, animationDelay: d != null ? `${d}s` : undefined }}
+          >
+            <path d={SPARK} fill="currentColor" />
+          </svg>
+        ))}
+      </div>
       <h2 className="faq__title display">Questions fréquentes</h2>
       <div className="faq__list">
         {FAQ.map((item, i) => {

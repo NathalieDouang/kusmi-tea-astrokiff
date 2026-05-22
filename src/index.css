@@ -646,9 +646,42 @@ html.lenis body {
   background: #f6f1f0;
 }
 .faq {
+  position: relative;
   max-width: 860px;
   margin: 0 auto;
   padding: 130px 28px 150px;
+}
+/* subtle animated backdrop behind the FAQ */
+.faq__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.faq-spark {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #c8a24c;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 6px rgba(200, 162, 76, 0.7));
+}
+.faq-tw {
+  animation: faq-twinkle 4.6s ease-in-out infinite;
+}
+@keyframes faq-twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+.faq__title,
+.faq__list {
+  position: relative;
+  z-index: 1;
 }
 .faq__title {
   text-align: center;
@@ -1011,7 +1044,8 @@ html.lenis body {
   .orbit-rotor,
   .orbit-ring--dotted,
   .orbit-ring--mid,
-  .shooting-star {
+  .shooting-star,
+  .faq-tw {
     animation: none;
   }
 }
