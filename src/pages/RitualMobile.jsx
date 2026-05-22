@@ -22,7 +22,7 @@ export default function RitualMobile() {
 
   return (
     <div className="m-page m-ritual" style={{ "--accent": theme.accent }}>
-      <FallingPetals accent={theme.accent} count={12} />
+      <FallingPetals accent={theme.accent} count={10} hideOnId="ritual-continuer" />
       <header className="m-topbar">
         <a href="/" className="m-topbar__brand" onClick={(e) => { e.preventDefault(); go("/"); }}>
           <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />
@@ -97,7 +97,7 @@ export default function RitualMobile() {
       </section>
 
       {/* dark "continuer" section */}
-      <section className="m-dark">
+      <section className="m-dark" id="ritual-continuer">
         <h2 className="display m-dark__title">Continuer l’experience...</h2>
         <p className="body m-dark__text">
           Chaque rituel explore une énergie différente, pensée pour accompagner vos états

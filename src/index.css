@@ -1136,6 +1136,12 @@ html.lenis body {
   z-index: 2;
   pointer-events: none;
   overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+/* faded out once the dark "Continuer l'experience" section is in view */
+.petals-layer.is-hidden {
+  opacity: 0;
 }
 .petal {
   position: absolute;

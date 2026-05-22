@@ -144,7 +144,7 @@ export default function RitualDesktop() {
 
   return (
     <>
-    <FallingPetals accent={theme.accent} />
+    <FallingPetals accent={theme.accent} hideOnId="ritual-continuer" />
     <Stage width={1280} height={STAGE_H} background="#f6f1f0" fill>
       <div ref={scopeRef} className="page-enter">
         {/* ── backgrounds ── */}
@@ -273,7 +273,7 @@ export default function RitualDesktop() {
         </div>
 
         {/* ── dark "continuer" section ── */}
-        <h2 className="abs display reveal" style={{ left: 118, top: 2013 + offD, width: 369, fontSize: 48, color: "#fff" }}>Continuer l’experience...</h2>
+        <h2 id="ritual-continuer" className="abs display reveal" style={{ left: 118, top: 2013 + offD, width: 369, fontSize: 48, color: "#fff" }}>Continuer l’experience...</h2>
         <p className="abs body reveal" style={{ left: 120, top: 2073 + offD, width: 447, fontSize: 16, color: "#fff", lineHeight: 1.4 }}>
           Chaque rituel explore une énergie différente, pensée pour accompagner vos états intérieurs et vos moments du quotidien.
         </p>
