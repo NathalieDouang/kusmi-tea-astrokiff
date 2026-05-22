@@ -11,6 +11,7 @@ import RitualCard from "../components/RitualCard.jsx";
 import CropImage from "../components/CropImage.jsx";
 import RitualBackdrop from "../components/RitualBackdrop.jsx";
 import OrbitSystem from "../components/OrbitSystem.jsx";
+import FallingPetals from "../components/FallingPetals.jsx";
 import { ritualsBySlug, relatedRituals } from "../data/rituals.js";
 
 // Uniform related-card size across every ritual page (placement kept as-is).
@@ -142,6 +143,8 @@ export default function RitualDesktop() {
   const tinSize = 339;
 
   return (
+    <>
+    <FallingPetals accent={theme.accent} />
     <Stage width={1280} height={STAGE_H} background="#f6f1f0" fill>
       <div ref={scopeRef} className="page-enter">
         {/* ── backgrounds ── */}
@@ -301,5 +304,6 @@ export default function RitualDesktop() {
         <SiteHeader ctaBg={cta} />
       </div>
     </Stage>
+    </>
   );
 }

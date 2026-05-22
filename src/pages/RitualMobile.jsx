@@ -2,6 +2,7 @@ import { useParams, Navigate } from "react-router-dom";
 import { usePageTransition } from "../components/PageTransition.jsx";
 import RitualCard from "../components/RitualCard.jsx";
 import HomeFooter from "../components/HomeFooter.jsx";
+import FallingPetals from "../components/FallingPetals.jsx";
 import { ritualsBySlug, relatedRituals } from "../data/rituals.js";
 
 function rgba79(hex) {
@@ -21,6 +22,7 @@ export default function RitualMobile() {
 
   return (
     <div className="m-page m-ritual" style={{ "--accent": theme.accent }}>
+      <FallingPetals accent={theme.accent} count={12} />
       <header className="m-topbar">
         <a href="/" className="m-topbar__brand" onClick={(e) => { e.preventDefault(); go("/"); }}>
           <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />

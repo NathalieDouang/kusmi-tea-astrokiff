@@ -1126,6 +1126,53 @@ html.lenis body {
   animation-delay: 2.4s;
 }
 
+/* ============================================================
+   Falling tea leaves & petals (ritual pages) — see FallingPetals.jsx
+   A fixed ambient layer: each particle falls while a child sways/rotates.
+   ============================================================ */
+.petals-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  top: 0;
+  will-change: transform;
+  animation: petal-fall linear infinite;
+}
+.petal__i {
+  display: block;
+  will-change: transform;
+  transform: scaleX(var(--flip, 1));
+  animation: petal-sway ease-in-out infinite;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
+}
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-14vh);
+  }
+  100% {
+    transform: translateY(114vh);
+  }
+}
+@keyframes petal-sway {
+  0%,
+  100% {
+    transform: translateX(-11px) rotate(-35deg) scaleX(var(--flip, 1));
+  }
+  50% {
+    transform: translateX(11px) rotate(45deg) scaleX(var(--flip, 1));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .petals-layer {
+    display: none;
+  }
+}
+
 /* minimal route-transition veil (see PageTransition.jsx) */
 .page-veil {
   position: fixed;
