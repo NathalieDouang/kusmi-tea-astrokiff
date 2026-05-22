@@ -10,11 +10,14 @@ export default function SiteFooter({ top, lineSrc, ink = "#000", bg = "#F6F1F0" 
         className="abs"
         style={{ left: 0, top, width: 1280, height: 260, background: bg }}
       />
+      {/* hairline divider. The SVG is a 1-unit line with preserveAspectRatio="none";
+          without an explicit height the <img> defaults to 150px and the stroke
+          stretches into a solid black block — so pin the height to 1px. */}
       <img
         className="abs"
         src={lineSrc}
         alt=""
-        style={{ left: 0, top, width: 1280 }}
+        style={{ left: 0, top, width: 1280, height: 1 }}
       />
       <img
         className="abs"

@@ -133,7 +133,9 @@ export default function Ritual() {
   const offD = offC + GAP.ctaDark; // section 4 (dark "Continuer")
   const offF = offD + GAP.darkFooter; // footer
   const NIGHT_TOP = 1877 + offD;
-  const STAGE_H = 2817 + offF;
+  // Footer band sits at (2665 + offF) and is 260 tall → it must reach 2925 + offF.
+  // Give it ~40px of cream breathing room below so the whole footer is reachable.
+  const STAGE_H = 2965 + offF;
 
   // All tins shown at one uniform size (= Énergie Intérieure's: 303 × 1.12),
   // centred on each page's own header.tin centre.
