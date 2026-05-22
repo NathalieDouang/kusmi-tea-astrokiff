@@ -1457,3 +1457,24 @@ html.lenis body {
     padding: 11px 30px;
   }
 }
+
+/* desktop/tablet: home flow sections each fill a full viewport height,
+   with their content centred so there's clear breathing room top & bottom */
+@media (min-width: 768px) {
+  .reviews,
+  .faq {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .reviews {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .faq {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
