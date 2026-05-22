@@ -1090,6 +1090,7 @@ html.lenis body {
   justify-content: space-between;
   padding: 14px 18px;
   gap: 12px;
+  background: #f6f1f0;
 }
 .m-topbar__brand img {
   height: 34px;
