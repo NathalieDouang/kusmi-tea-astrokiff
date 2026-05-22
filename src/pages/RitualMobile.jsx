@@ -85,6 +85,12 @@ export default function RitualMobile() {
         <a href="#" className="cta cta--lg m-cta-block" style={{ background: cta }} onClick={(e) => e.preventDefault()}>
           COMMANDER
         </a>
+        <button type="button" className="cta-ghost m-faq-link" onClick={() => go("/#faq")}>
+          <span className="cta-ghost__text">Une question ? Consultez la FAQ</span>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" aria-hidden="true">
+            <path d="M2 3 L8 9 L14 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </section>
 
       {/* dark "continuer" section */}

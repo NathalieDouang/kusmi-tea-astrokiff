@@ -38,7 +38,7 @@ export default function FaqSection() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="faq" aria-label="Questions fréquentes">
+    <section className="faq" id="faq" aria-label="Questions fréquentes">
       <div className="faq__bg" aria-hidden="true">
         {SPARKS.map(([x, y, s, d], i) => (
           <svg

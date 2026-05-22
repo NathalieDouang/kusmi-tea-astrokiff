@@ -257,9 +257,15 @@ export default function RitualDesktop() {
         <h2 className="abs display reveal" style={{ left: "50%", transform: "translateX(-50%)", top: 1446 + offC, width: 437, fontSize: 64, textAlign: "center", lineHeight: 1.05 }}>
           Faire entrer le rituel dans votre quotidien
         </h2>
-        <div className="abs" style={{ left: 0, top: 1632 + offC, width: 1280, display: "flex", justifyContent: "center" }}>
+        <div className="abs" style={{ left: 0, top: 1632 + offC, width: 1280, display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
           <button className="cta cta--lg" style={{ background: cta }} onClick={(e) => e.preventDefault()}>
             COMMANDER
+          </button>
+          <button type="button" className="cta-ghost" onClick={() => go("/#faq")}>
+            <span className="cta-ghost__text">Une question ? Consultez la FAQ</span>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" aria-hidden="true">
+              <path d="M2 3 L8 9 L14 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
         </div>
 

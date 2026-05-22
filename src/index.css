@@ -1320,6 +1320,9 @@ html.lenis body {
 .m-cta-section {
   text-align: center;
 }
+.m-faq-link {
+  margin-top: 20px;
+}
 .m-cta-title {
   font-size: clamp(28px, 9vw, 42px);
   line-height: 1.05;
