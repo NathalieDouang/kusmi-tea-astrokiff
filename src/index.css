@@ -1549,12 +1549,12 @@ html.lenis body {
     box-sizing: border-box;
   }
   .reviews {
-    min-height: 80vh;
-    padding-top: 70px;
-    padding-bottom: 70px;
+    min-height: 64vh;
+    padding-top: 56px;
+    padding-bottom: 36px;
   }
   .faq {
-    padding-top: 80px;
+    padding-top: 56px;
     padding-bottom: 80px;
   }
 }
