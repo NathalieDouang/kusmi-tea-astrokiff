@@ -7,6 +7,7 @@ import { usePageTransition } from "../components/PageTransition.jsx";
 import { smoothScrollTo } from "../lib/lenis.js";
 import SiteHeader from "../components/SiteHeader.jsx";
 import FaqSection from "../components/FaqSection.jsx";
+import ReviewsSection from "../components/ReviewsSection.jsx";
 import RitualCard from "../components/RitualCard.jsx";
 import CropImage from "../components/CropImage.jsx";
 import { rituals, fanLayout } from "../data/rituals.js";
@@ -237,8 +238,9 @@ export default function HomeDesktop() {
       </div>
     </Stage>
 
-    {/* dedicated FAQ section + footer (normal flow, below the scaled hero) */}
+    {/* reviews + FAQ section + footer (normal flow, below the scaled hero) */}
     <div className="home-lower">
+      <ReviewsSection />
       <FaqSection />
       <footer className="home-footer">
         <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />

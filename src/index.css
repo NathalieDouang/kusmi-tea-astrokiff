@@ -742,6 +742,76 @@ html.lenis body {
   line-height: 1.65;
   color: var(--ink-soft);
 }
+/* ── customer reviews (between collaboration & FAQ) ── */
+.reviews {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 110px 28px 30px;
+  text-align: center;
+}
+.reviews__title {
+  font-size: 48px;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.reviews__sub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin: 0 0 44px;
+}
+.reviews__score {
+  font-weight: 600;
+  color: #c8a24c;
+}
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  text-align: left;
+}
+.review-card {
+  margin: 0;
+  padding: 28px 26px 26px;
+  background: #fffdfb;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.review-card__stars {
+  display: flex;
+  gap: 3px;
+  color: #c8a24c;
+}
+.review-card__quote {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.review-card__author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+}
+.review-card__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+}
+.review-card__meta {
+  font-family: var(--font-label);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
 .home-footer {
   max-width: 1180px;
   margin: 0 auto;
@@ -1350,8 +1420,21 @@ html.lenis body {
 
 /* shared components: tighten for phones */
 @media (max-width: 767px) {
+  .reviews {
+    padding: 30px 22px 10px;
+  }
+  .reviews__title {
+    font-size: 30px;
+  }
+  .reviews__sub {
+    margin-bottom: 30px;
+  }
+  .reviews__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
   .faq {
-    padding: 96px 20px 84px;
+    padding: 72px 20px 84px;
   }
   .faq__title {
     font-size: 30px;

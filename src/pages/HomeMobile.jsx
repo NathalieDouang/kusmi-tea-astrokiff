@@ -1,5 +1,6 @@
 import { usePageTransition } from "../components/PageTransition.jsx";
 import FaqSection from "../components/FaqSection.jsx";
+import ReviewsSection from "../components/ReviewsSection.jsx";
 import RitualCard from "../components/RitualCard.jsx";
 import { rituals } from "../data/rituals.js";
 
@@ -74,6 +75,8 @@ export default function HomeMobile() {
           COMMANDER
         </a>
       </section>
+
+      <ReviewsSection />
 
       <FaqSection />
 
