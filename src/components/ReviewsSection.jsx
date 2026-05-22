@@ -38,6 +38,20 @@ function Stars() {
 export default function ReviewsSection() {
   return (
     <section className="reviews" aria-label="Avis clients">
+      {/* huge slowly-orbiting celestial circle behind the cards */}
+      <div className="reviews__bg" aria-hidden="true">
+        <div className="reviews-orbit">
+          <span className="reviews-orbit__ring reviews-orbit__ring--outer" />
+          <span className="reviews-orbit__ring reviews-orbit__ring--mid" />
+          <span className="reviews-orbit__ring reviews-orbit__ring--inner" />
+          <span className="reviews-orbit__rotor">
+            <span className="reviews-orbit__planet" />
+          </span>
+          <span className="reviews-orbit__rotor reviews-orbit__rotor--rev">
+            <span className="reviews-orbit__planet reviews-orbit__planet--sm" />
+          </span>
+        </div>
+      </div>
       <h2 className="reviews__title display">Ils ont trouvé leur rituel</h2>
       <p className="reviews__sub">
         <span className="reviews__score">4,9/5</span> · plus de 1&nbsp;200 avis vérifiés

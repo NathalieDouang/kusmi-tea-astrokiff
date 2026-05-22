@@ -744,10 +744,86 @@ html.lenis body {
 }
 /* ── customer reviews (between collaboration & FAQ) ── */
 .reviews {
+  position: relative;
+  overflow: hidden;
   max-width: 1120px;
   margin: 0 auto;
   padding: 110px 28px 30px;
   text-align: center;
+}
+/* huge orbiting circle backdrop */
+.reviews__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.reviews-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(880px, 92vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+.reviews-orbit__ring {
+  position: absolute;
+  border-radius: 50%;
+}
+.reviews-orbit__ring--outer {
+  inset: 0;
+  border: 1px solid rgba(200, 162, 76, 0.2);
+}
+.reviews-orbit__ring--mid {
+  inset: 13%;
+  border: 1px dashed rgba(200, 162, 76, 0.16);
+  animation: spin360 90s linear infinite;
+}
+.reviews-orbit__ring--inner {
+  inset: 30%;
+  border: 1px solid rgba(200, 162, 76, 0.13);
+}
+.reviews-orbit__rotor {
+  position: absolute;
+  inset: 0;
+  animation: spin360 30s linear infinite;
+}
+.reviews-orbit__rotor--rev {
+  inset: 13%;
+  animation: spin360 46s linear infinite reverse;
+}
+.reviews-orbit__planet {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 34%,
+    rgba(200, 162, 76, 0.85),
+    rgba(200, 162, 76, 0.22) 70%
+  );
+  box-shadow: 0 0 34px rgba(200, 162, 76, 0.45);
+}
+.reviews-orbit__planet--sm {
+  top: -7px;
+  width: 13px;
+  height: 13px;
+  box-shadow: 0 0 20px rgba(200, 162, 76, 0.4);
+}
+@keyframes spin360 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.reviews__title,
+.reviews__sub,
+.reviews__grid {
+  position: relative;
+  z-index: 1;
 }
 .reviews__title {
   font-size: 48px;
@@ -1115,7 +1191,10 @@ html.lenis body {
   .orbit-ring--dotted,
   .orbit-ring--mid,
   .shooting-star,
-  .faq-tw {
+  .faq-tw,
+  .reviews-orbit__ring--mid,
+  .reviews-orbit__rotor,
+  .reviews-orbit__rotor--rev {
     animation: none;
   }
 }
@@ -1470,12 +1549,12 @@ html.lenis body {
     box-sizing: border-box;
   }
   .reviews {
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
-  .faq {
     min-height: 80vh;
     padding-top: 70px;
     padding-bottom: 70px;
+  }
+  .faq {
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 }
