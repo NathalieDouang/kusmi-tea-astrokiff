@@ -8,7 +8,7 @@ export default function SiteFooter({ top, lineSrc, ink = "#000", bg = "#F6F1F0" 
       {/* footer background band (full-width) */}
       <div
         className="abs"
-        style={{ left: 0, top, width: 1280, height: 260, background: bg }}
+        style={{ left: 0, top, width: 1280, height: 130, background: bg }}
       />
       {/* hairline divider. The SVG is a 1-unit line with preserveAspectRatio="none";
           without an explicit height the <img> defaults to 150px and the stroke
