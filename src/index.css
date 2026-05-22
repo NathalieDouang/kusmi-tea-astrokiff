@@ -1101,7 +1101,7 @@ html.lenis body {
 .m-hero {
   position: relative;
   text-align: center;
-  padding: 34px 22px 30px;
+  padding: 34px 22px 40px;
   overflow: hidden;
 }
 .m-hero__deco {
@@ -1147,7 +1147,7 @@ html.lenis body {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: 30px 16px 18px;
+  padding: 42px 16px 22px;
   scroll-padding: 0 16px;
   scrollbar-width: none;
 }
@@ -1175,7 +1175,7 @@ html.lenis body {
   letter-spacing: 0.9px;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin: 4px 0 10px;
+  margin: 6px 0 14px;
 }
 .m-cue--dark {
   color: #e7e7ef;
@@ -1217,7 +1217,7 @@ html.lenis body {
 
 /* collaboration */
 .m-collab {
-  padding: 66px 22px 20px;
+  padding: 90px 22px 30px;
 }
 .m-collab__photos {
   display: flex;
@@ -1348,7 +1348,7 @@ html.lenis body {
 /* shared components: tighten for phones */
 @media (max-width: 767px) {
   .faq {
-    padding: 76px 20px 80px;
+    padding: 96px 20px 84px;
   }
   .faq__title {
     font-size: 30px;
