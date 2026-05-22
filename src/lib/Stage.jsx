@@ -11,7 +11,7 @@ import { useEffect, useRef } from "react";
  *                        always fills the full viewport width — section
  *                        backgrounds bleed edge-to-edge (no side margins).
  */
-export default function Stage({ width = 1280, height, background, fill = false, children }) {
+export default function Stage({ width = 1280, height, background, fill = false, fitDesignHeight = 0, children }) {
   const wrapRef = useRef(null);
   const stageRef = useRef(null);
 
@@ -22,7 +22,12 @@ export default function Stage({ width = 1280, height, background, fill = false, 
 
     const apply = () => {
       const avail = wrap.clientWidth;
-      const scale = fill ? avail / width : Math.min(1, avail / width);
+      let scale = fill ? avail / width : Math.min(1, avail / width);
+      // Also fit a key region (e.g. the hero) into the viewport HEIGHT, so on
+      // short screens (13" laptops) the bottom of the hero isn't cut off.
+      if (fitDesignHeight) {
+        scale = Math.min(scale, window.innerHeight / fitDesignHeight);
+      }
       stage.style.setProperty("--stage-scale", scale);
       wrap.style.height = `${height * scale}px`;
     };
@@ -35,7 +40,7 @@ export default function Stage({ width = 1280, height, background, fill = false, 
       ro.disconnect();
       window.removeEventListener("resize", apply);
     };
-  }, [width, height, fill]);
+  }, [width, height, fill, fitDesignHeight]);
 
   return (
     <div className="stage-wrap" ref={wrapRef} style={{ background }}>

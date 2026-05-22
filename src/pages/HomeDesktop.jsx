@@ -53,7 +53,7 @@ export default function HomeDesktop() {
           WebkitMaskImage: "linear-gradient(to bottom, #000 60%, transparent 100%)",
         }}
       />
-      <Stage width={1280} height={2020} background="transparent">
+      <Stage width={1280} height={2020} background="transparent" fitDesignHeight={900}>
         <div ref={scopeRef} className="page-enter">
         <SiteHeader ctaBg={HOME_CTA} />
 
