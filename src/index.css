@@ -1318,7 +1318,7 @@ html.lenis body {
 .m-hero {
   position: relative;
   text-align: center;
-  padding: 34px 22px 40px;
+  padding: 34px 22px 50px;
   overflow: hidden;
 }
 .m-hero__deco {
@@ -1364,7 +1364,7 @@ html.lenis body {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding: 42px 16px 22px;
+  padding: 52px 16px 26px;
   scroll-padding: 0 16px;
   scrollbar-width: none;
 }
@@ -1434,7 +1434,7 @@ html.lenis body {
 
 /* collaboration */
 .m-collab {
-  padding: 90px 22px 30px;
+  padding: 108px 22px 44px;
 }
 .m-collab__photos {
   display: flex;
@@ -1568,7 +1568,7 @@ html.lenis body {
 /* shared components: tighten for phones */
 @media (max-width: 767px) {
   .reviews {
-    padding: 30px 22px 10px;
+    padding: 60px 22px 36px;
   }
   .reviews__title {
     font-size: 30px;
@@ -1581,7 +1581,7 @@ html.lenis body {
     gap: 16px;
   }
   .faq {
-    padding: 72px 20px 84px;
+    padding: 100px 20px 92px;
   }
   .faq__title {
     font-size: 30px;
