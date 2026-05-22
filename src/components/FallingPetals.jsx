@@ -9,7 +9,7 @@ import { useMemo, useEffect, useRef } from "react";
 const LEAF = "M12 1.5C17 6 17.5 15 12 22.5 6.5 15 7 6 12 1.5Z";
 const PETAL = "M12 3C15.5 8 15.5 14.5 12 21 8.5 14.5 8.5 8 12 3Z";
 
-export default function FallingPetals({ accent = "#c8a24c", count = 13, hideOnId }) {
+export default function FallingPetals({ accent = "#c8a24c", count = 10, hideOnId }) {
   const layerRef = useRef(null);
 
   useEffect(() => {
@@ -30,9 +30,9 @@ export default function FallingPetals({ accent = "#c8a24c", count = 13, hideOnId
     return Array.from({ length: count }).map(() => ({
       left: Math.random() * 100,
       size: 11 + Math.random() * 15,
-      fall: 9 + Math.random() * 9,
-      sway: 3 + Math.random() * 3,
-      delay: -Math.random() * 18,
+      fall: 16 + Math.random() * 13,
+      sway: 4.5 + Math.random() * 4,
+      delay: -Math.random() * 28,
       opacity: 0.22 + Math.random() * 0.33,
       color: palette[(Math.random() * palette.length) | 0],
       leaf: Math.random() > 0.4,

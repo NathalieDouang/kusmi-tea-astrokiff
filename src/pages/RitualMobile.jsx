@@ -22,7 +22,7 @@ export default function RitualMobile() {
 
   return (
     <div className="m-page m-ritual" style={{ "--accent": theme.accent }}>
-      <FallingPetals accent={theme.accent} count={10} hideOnId="ritual-continuer" />
+      <FallingPetals accent={theme.accent} count={8} hideOnId="ritual-continuer" />
       <header className="m-topbar">
         <a href="/" className="m-topbar__brand" onClick={(e) => { e.preventDefault(); go("/"); }}>
           <img src="/assets/logo.png" alt="Kusmi Tea × Astrokiff" />
