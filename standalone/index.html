@@ -1,0 +1,1758 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kusmi Tea × Astrokiff — Le Salon Céleste · Cinq Rituels</title>
+
+<!-- Fallback display fonts from Google so the page is never naked -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..600;1,300..600&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+</script>
+
+<style>
+  /* Mirtha Display Regular DEMO — if installed locally on the user's system it will load.
+     Otherwise we gracefully fall back to a high-contrast display serif. */
+  @font-face {
+    font-family: 'Mirtha Display Regular DEMO';
+    src: local('Mirtha Display Regular DEMO'),
+         local('MirthaDisplayRegularDEMO'),
+         local('Mirtha Display'),
+         local('MirthaDisplay-Regular');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    /* Pastel celestial palette */
+    --sage:           #B6C9B4;
+    --sage-deep:      #8FA890;
+    --mint:           #C9DDD4;
+    --powder:         #C9D7E0;
+    --turquoise:      #B7D5D2;
+    --lunar-cream:    #F2EBE0;
+    --ivory:          #F7F1E6;
+    --lavender:       #D9D2E3;
+    --lavender-deep:  #B6AAC8;
+    --celest-blue:    #A8B8C8;
+    --dust-blue:      #94A6BA;
+    --silver-mist:    #D4D8DA;
+    --dust-green:     #A5B5A4;
+    --rose-pale:      #E6CFCE;
+    --peach-pale:     #E8D2B8;
+    --night-veil:     #2F3742;
+    --ink:            #2A3138;
+    --ink-soft:       #4A5560;
+    --gold-fine:      #C8B58A;
+    --gold-soft:      #D8C79A;
+    --gold-pale:      #ECDFB8;
+
+    --f-display: 'Mirtha Display Regular DEMO', 'Cormorant Garamond', 'Playfair Display', serif;
+    --f-body:    'Calibri', 'Calibri Light', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --f-script:  'Cormorant Garamond', serif;
+  }
+
+  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html, body {
+    background: var(--lunar-cream);
+    color: var(--ink);
+    font-family: var(--f-body);
+    overflow-x: hidden;
+  }
+  body { cursor: none; }
+  @media (hover: none) { body { cursor: auto; } .cursor { display: none !important; } }
+  ::selection { background: var(--gold-soft); color: var(--night-veil); }
+  body::-webkit-scrollbar { width: 0; }
+  body { scrollbar-width: none; }
+
+  /* ====== Typography ====== */
+  .display {
+    font-family: var(--f-display);
+    font-weight: 400;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
+  }
+  .script-italic {
+    font-family: var(--f-script);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .caps {
+    font-family: var(--f-body);
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 10px;
+    font-weight: 500;
+  }
+  .label-caps {
+    font-family: var(--f-body);
+    text-transform: uppercase;
+    letter-spacing: 0.45em;
+    font-size: 9px;
+    font-weight: 500;
+  }
+
+  /* ====== Loader ====== */
+  .loader {
+    position: fixed; inset: 0; z-index: 2000;
+    background:
+      radial-gradient(ellipse at 50% 45%, #f5ecdc 0%, #e8e0d0 40%, #d9d2e3 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 36px;
+  }
+  .loader__seal { width: 160px; height: 160px; position: relative; }
+  .loader__seal svg { width: 100%; height: 100%; animation: rotate 26s linear infinite; }
+  .loader__core {
+    position: absolute; inset: 36%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-pale), var(--gold-soft) 60%, transparent 80%);
+    filter: blur(2px);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .loader__brand {
+    font-family: var(--f-display); font-size: 28px; color: var(--ink); letter-spacing: 0.04em;
+  }
+  .loader__brand em { font-family: var(--f-script); font-style: italic; color: var(--gold-fine); }
+  .loader__label { font-family: var(--f-body); font-size: 10px; letter-spacing: 0.5em; color: var(--ink-soft); text-transform: uppercase; }
+  .loader__count {
+    font-family: var(--f-display); font-size: 100px;
+    color: var(--ink); line-height: 1;
+  }
+  @keyframes rotate { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100%{ transform: scale(1); opacity: 0.95 } 50%{ transform: scale(1.18); opacity: 1 } }
+
+  /* ====== Cursor ====== */
+  .cursor {
+    position: fixed; top:0; left:0; width: 26px; height: 26px;
+    border: 1px solid var(--gold-fine); border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 9999;
+    transition: width .45s cubic-bezier(.2,.9,.2,1), height .45s cubic-bezier(.2,.9,.2,1), border-color .4s, background .4s;
+  }
+  .cursor::before {
+    content:''; position:absolute; inset:0; margin:auto;
+    width:3px; height:3px; border-radius:50%; background: var(--gold-fine);
+    transform: translate(calc(50% - 1.5px), calc(50% - 1.5px));
+  }
+  .cursor.hover { width: 76px; height: 76px; border-color: var(--gold-soft); background: rgba(216,199,154,0.08); }
+  .cursor.hover::before { background: var(--gold-fine); }
+  .cursor.card { width: 110px; height: 110px; border-color: var(--ink); background: rgba(255,255,255,0.05); }
+  .cursor.card::after {
+    content: 'Révéler'; position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-family: var(--f-body); font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* ====== Grain ====== */
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1500; opacity: 0.18;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.78  0 0 0 0 0.62  0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+  .vignette {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    box-shadow: inset 0 0 280px 60px rgba(180, 170, 150, 0.25);
+  }
+
+  /* ====== Painterly section backgrounds ====== */
+  .sky-1 {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 18%, rgba(247,241,230,0.95), transparent 70%),
+      radial-gradient(ellipse 70% 40% at 18% 90%, rgba(199,217,224,0.55), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 82% 88%, rgba(230,207,206,0.5), transparent 60%),
+      radial-gradient(ellipse 90% 80% at 50% 50%, rgba(217,210,227,0.4), transparent 70%),
+      linear-gradient(180deg, #e8e3d4 0%, #d8d8d8 40%, #c9d7e0 70%, #d9d2e3 100%);
+  }
+  .sky-2 {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 0%, rgba(217,210,227,0.7), transparent 60%),
+      radial-gradient(ellipse 80% 60% at 80% 100%, rgba(183,213,210,0.5), transparent 60%),
+      linear-gradient(180deg, #e9e2d3 0%, #d9d6c8 50%, #c9d7d6 100%);
+  }
+  .sky-night {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 30%, rgba(199,213,224,0.4), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 20% 90%, rgba(217,210,227,0.5), transparent 60%),
+      linear-gradient(180deg, #c8cfd9 0%, #b6c0cf 50%, #a8b8c8 100%);
+  }
+  .sky-rose {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 100%, rgba(230,207,206,0.7), transparent 70%),
+      radial-gradient(ellipse 70% 40% at 80% 0%, rgba(247,241,230,0.6), transparent 60%),
+      linear-gradient(180deg, #e8e0d4 0%, #e6cfce 100%);
+  }
+
+  .paper {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.48  0 0 0 0 0.35  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  /* ====== Stars layer ====== */
+  .stars {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 14% 18%, rgba(255,255,255,0.95), transparent),
+      radial-gradient(1.4px 1.4px at 67% 14%, rgba(255,253,243,0.95), transparent),
+      radial-gradient(1px 1px at 88% 64%, rgba(255,255,255,0.85), transparent),
+      radial-gradient(1.2px 1.2px at 22% 78%, rgba(255,250,235,0.85), transparent),
+      radial-gradient(1px 1px at 41% 41%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1.6px 1.6px at 92% 14%, rgba(255,250,235,0.95), transparent),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.2px 1.2px at 55% 82%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 76% 92%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.4px 1.4px at 6% 36%, rgba(255,253,243,0.9), transparent);
+    opacity: 0.55;
+  }
+
+  /* ====== Buttons ====== */
+  .btn-celest {
+    position: relative; display: inline-flex; align-items: center; gap: 14px;
+    padding: 17px 30px; border-radius: 999px;
+    font-family: var(--f-body); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ivory); background: var(--ink);
+    overflow: hidden; isolation: isolate;
+    transition: color .5s, transform .5s cubic-bezier(.2,.9,.2,1);
+    border: 1px solid var(--ink);
+  }
+  .btn-celest::before {
+    content:''; position:absolute; inset:0; z-index:-1;
+    background: linear-gradient(120deg, var(--gold-fine) 0%, var(--gold-soft) 50%, var(--gold-pale) 100%);
+    transform: translateY(101%);
+    transition: transform .7s cubic-bezier(.2,.9,.2,1);
+  }
+  .btn-celest:hover::before { transform: translateY(0); }
+  .btn-celest:hover { color: var(--ink); }
+  .btn-celest .arr { transition: transform .5s; }
+  .btn-celest:hover .arr { transform: translateX(6px); }
+
+  .btn-soft {
+    display: inline-flex; align-items: center; gap: 14px;
+    padding: 17px 30px; border-radius: 999px;
+    font-family: var(--f-body); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink);
+    border: 1px solid rgba(42,49,56,0.3);
+    background: rgba(247,241,230,0.45);
+    backdrop-filter: blur(6px);
+    transition: all .5s;
+  }
+  .btn-soft:hover { border-color: var(--ink); background: rgba(247,241,230,0.85); }
+
+  /* ====== Section tags ====== */
+  .sec-tag {
+    display: inline-flex; gap: 16px; align-items: center;
+    color: var(--ink-soft);
+  }
+  .sec-tag .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold-fine); }
+  .sec-tag .line { width: 50px; height: 1px; background: linear-gradient(90deg, var(--gold-fine), transparent); }
+
+  /* ====== Navigation ====== */
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content:''; position:absolute; left:0; bottom:-5px;
+    width:0; height:1px; background: currentColor;
+    transition: width .45s cubic-bezier(.2,.9,.2,1);
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* ====== Floating helpers ====== */
+  @keyframes floatY {
+    0%,100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50%     { transform: translateY(-22px) rotate(var(--r, 0deg)); }
+  }
+  @keyframes floatY-2 {
+    0%,100% { transform: translateY(0) translateX(0) rotate(var(--r, 0deg)); }
+    50%     { transform: translateY(-14px) translateX(8px) rotate(var(--r, 0deg)); }
+  }
+  .float-y     { animation: floatY 9s ease-in-out infinite; }
+  .float-y-slow{ animation: floatY 14s ease-in-out infinite; }
+  .float-drift { animation: floatY-2 16s ease-in-out infinite; }
+
+  /* ====== Card row (5 floating ritual cards, equal height, flex-positioned, responsive) ====== */
+  .cards-fan {
+    position: relative;
+    width: 100%; min-height: clamp(240px, 23vw, 360px);
+    perspective: 1800px;
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(10px, 1.8vw, 28px);
+    padding: 14px 0 12px;
+  }
+  .ritual-card {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(150px, 14vw, 210px);
+    height: clamp(220px, 21vw, 320px);
+    border-radius: 6px;
+    transform-style: preserve-3d;
+    cursor: none;
+    transition: box-shadow .7s, filter .7s;
+    will-change: transform;
+    background:
+      linear-gradient(180deg, rgba(247,241,230,0.0), rgba(42,49,56,0.06)),
+      var(--card-grad);
+    box-shadow:
+      0 4px 12px rgba(42,49,56,0.08),
+      0 26px 60px -16px rgba(42,49,56,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.5),
+      inset 0 -1px 0 rgba(42,49,56,0.05);
+  }
+  .ritual-card::before {
+    /* Inner gold border */
+    content: ''; position: absolute; inset: 8px;
+    border: 1px solid rgba(200,181,138,0.5);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .ritual-card::after {
+    /* Paper texture overlay */
+    content: ''; position: absolute; inset: 0; border-radius: 6px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.40  0 0 0 0 0.30  0 0 0 0.10 0'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+    mix-blend-mode: multiply;
+    pointer-events: none; opacity: 0.45;
+  }
+  .ritual-card:hover {
+    filter: brightness(1.06);
+    box-shadow:
+      0 4px 12px rgba(42,49,56,0.12),
+      0 40px 80px -10px rgba(42,49,56,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .ritual-card.is-active {
+    filter: brightness(1.08);
+  }
+
+  .ritual-card__inner {
+    position: relative; z-index: 2;
+    height: 100%; padding: clamp(14px, 1.3vw, 22px) clamp(12px, 1.2vw, 18px);
+    display: flex; flex-direction: column; justify-content: space-between;
+    color: var(--card-ink, var(--ink));
+  }
+  .ritual-card__roman {
+    font-family: var(--f-display); font-size: clamp(22px, 1.8vw, 28px);
+    color: var(--card-accent, var(--gold-fine));
+    letter-spacing: 0.04em;
+  }
+  .ritual-card__art {
+    flex: 1; display: grid; place-items: center; padding: clamp(6px, 1vw, 12px) 0;
+  }
+  .ritual-card__art svg { width: 100%; height: 100%; max-height: clamp(100px, 10vw, 150px); }
+  .ritual-card__title {
+    font-family: var(--f-display); font-size: clamp(11px, 1vw, 15px); line-height: 1.1; text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--card-ink, var(--ink));
+    margin-top: 6px;
+  }
+  .ritual-card__sub {
+    font-family: var(--f-script); font-style: italic; font-size: clamp(10px, 0.85vw, 12.5px);
+    color: var(--card-ink-soft, var(--ink-soft));
+    margin-top: 4px; line-height: 1.2;
+  }
+  .ritual-card__corner {
+    position: absolute; top: 14px; right: 14px;
+    font-family: var(--f-body); font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--card-ink-soft, var(--ink-soft));
+  }
+  .ritual-card__corner-bottom {
+    position: absolute; bottom: 14px; left: 14px;
+    font-family: var(--f-body); font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--card-ink-soft, var(--ink-soft));
+  }
+
+  /* World palettes per card */
+  .world-lune    { --card-grad: linear-gradient(180deg, #e6dcec 0%, #cdc0d8 100%); --card-ink: #3a3247; --card-ink-soft: rgba(58,50,71,0.65); --card-accent: #8a7ba0; }
+  .world-tarot   { --card-grad: linear-gradient(180deg, #cdd9d8 0%, #aebdb8 100%); --card-ink: #2c3a3d; --card-ink-soft: rgba(44,58,61,0.65); --card-accent: #6f8077; }
+  .world-matin   { --card-grad: linear-gradient(180deg, #f3ead4 0%, #e8d2b8 100%); --card-ink: #4a3a26; --card-ink-soft: rgba(74,58,38,0.65); --card-accent: #b08f5c; }
+  .world-venus   { --card-grad: linear-gradient(180deg, #f0d9d8 0%, #d7b8b5 100%); --card-ink: #4a2c2c; --card-ink-soft: rgba(74,44,44,0.65); --card-accent: #a87878; }
+  .world-reves   { --card-grad: linear-gradient(180deg, #cee0de 0%, #a6c0bf 100%); --card-ink: #243747; --card-ink-soft: rgba(36,55,71,0.65); --card-accent: #6a8a96; }
+
+  /* ====== Marquee ====== */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid rgba(42,49,56,0.12);
+    border-bottom: 1px solid rgba(42,49,56,0.12);
+    padding: 24px 0;
+    background: var(--ivory);
+  }
+  .marquee__track {
+    display: flex; gap: 56px; white-space: nowrap;
+    animation: marquee 60s linear infinite;
+    font-family: var(--f-display); font-size: 54px;
+    color: var(--ink); align-items: center;
+  }
+  .marquee__track .star { color: var(--gold-fine); font-size: 22px; }
+  .marquee__track em { font-family: var(--f-script); font-style: italic; color: var(--gold-fine); font-size: 50px; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ====== Reveal helpers ====== */
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 1.2s, transform 1.2s; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  /* .word reveal is driven purely by GSAP — no CSS transition to avoid conflicts */
+  .word { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.18em; line-height: 1.05; }
+  .word > span { display: inline-block; will-change: transform; }
+
+  /* ====== Ornate corner ornaments ====== */
+  .gold-ornament {
+    width: 60px; height: 60px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><g fill='none' stroke='%23C8B58A' stroke-width='0.7'><path d='M2 18 Q2 2 18 2'/><path d='M2 26 Q2 10 26 10'/><path d='M6 6 Q14 6 18 14 Q22 18 26 26'/><circle cx='2' cy='2' r='1.6' fill='%23C8B58A'/><circle cx='14' cy='14' r='1' fill='%23C8B58A'/><circle cx='26' cy='26' r='1.2' fill='%23C8B58A'/></g></svg>");
+    background-repeat: no-repeat; background-size: contain;
+  }
+
+  /* ====== Step number ====== */
+  .step-row {
+    position: relative;
+    display: grid; grid-template-columns: 80px 1fr auto; gap: 20px; align-items: center;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(42,49,56,0.12);
+  }
+  .step-num {
+    font-family: var(--f-display); font-size: 50px; color: var(--gold-fine); line-height: 1;
+    transition: color .5s, transform .5s;
+  }
+  .step-row:hover .step-num { color: var(--ink); transform: translateX(4px); }
+  .step-text {
+    font-family: var(--f-display); font-size: 28px; color: var(--ink); line-height: 1.1;
+  }
+  .step-meta { font-family: var(--f-body); font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* ====== Chip ====== */
+  .chip-celest {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: var(--f-body); font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--ink); border: 1px solid rgba(42,49,56,0.25);
+    background: rgba(247,241,230,0.55);
+    backdrop-filter: blur(8px);
+  }
+
+  /* ====== Glass / velvet panel ====== */
+  .panel-velvet {
+    background:
+      linear-gradient(180deg, rgba(247,241,230,0.78), rgba(247,241,230,0.55));
+    border: 1px solid rgba(200,181,138,0.45);
+    border-radius: 6px;
+    position: relative;
+    backdrop-filter: blur(18px);
+  }
+  .panel-velvet::after {
+    content:''; position:absolute; inset: 8px;
+    border: 1px solid rgba(200,181,138,0.3); pointer-events: none; border-radius: 4px;
+  }
+
+  /* ====== Big floating tea tin (ritual page) ====== */
+  .tin-celest {
+    position: relative; width: 100%; aspect-ratio: 5/6;
+    perspective: 1400px;
+    display: grid; place-items: center;
+  }
+  .tin-celest__body {
+    position: relative; width: 76%; aspect-ratio: 5/7;
+    transform-style: preserve-3d;
+    transform: rotateX(8deg) rotateY(-8deg);
+    transition: transform 1.5s cubic-bezier(.2,.9,.2,1);
+  }
+  .tin-celest:hover .tin-celest__body { transform: rotateX(8deg) rotateY(8deg); }
+  .tin-celest__face {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 18%, rgba(255,255,255,0.3), transparent 50%),
+      var(--tin-grad, linear-gradient(180deg, #cdc0d8 0%, #8a7ba0 100%));
+    border-radius: 4px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.35),
+      inset 0 -22px 38px rgba(42,49,56,0.2),
+      0 40px 70px -16px rgba(42,49,56,0.45),
+      0 0 80px -10px var(--tin-glow, rgba(138,123,160,0.4));
+    overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .tin-celest__band {
+    height: 14%; background: var(--gold-fine);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--f-body); font-size: 8px; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--night-veil); font-weight: 600;
+    border-top: 1px solid rgba(42,49,56,0.25);
+    border-bottom: 1px solid rgba(42,49,56,0.25);
+  }
+  .tin-celest__label {
+    position: absolute; left: 10%; right: 10%; top: 19%; bottom: 19%;
+    border: 1.5px solid var(--gold-pale);
+    border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 16px 12px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(247,241,230,0.18), transparent 70%);
+  }
+  .tin-celest__label::before {
+    content:''; position: absolute; inset: 5px;
+    border: 1px solid rgba(236,223,184,0.5); border-radius: 50%;
+  }
+  .tin-celest__glyph {
+    font-family: var(--f-display); font-size: 84px; line-height: 1; color: var(--gold-pale);
+    text-shadow: 0 0 30px rgba(236,223,184,0.6);
+  }
+  .tin-celest__name {
+    font-family: var(--f-display); font-size: 20px; line-height: 1.05;
+    color: var(--ivory); margin-top: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .tin-celest__sub {
+    font-family: var(--f-body); font-size: 8px; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--gold-pale); margin-top: 8px;
+  }
+  .tin-celest__stars { position: absolute; inset: 0; }
+  .tin-celest__stars i {
+    position: absolute; width: 2px; height: 2px; border-radius: 50%;
+    background: var(--gold-pale); box-shadow: 0 0 6px var(--gold-soft);
+  }
+
+  /* Tin world per ritual */
+  .tin-lune  { --tin-grad: linear-gradient(180deg, #b9a8cf 0%, #6a5d83 100%); --tin-glow: rgba(186,168,207,0.5); }
+  .tin-tarot { --tin-grad: linear-gradient(180deg, #8c9d99 0%, #455751 100%); --tin-glow: rgba(140,157,153,0.5); }
+  .tin-matin { --tin-grad: linear-gradient(180deg, #d4b08a 0%, #876040 100%); --tin-glow: rgba(212,176,138,0.5); }
+  .tin-venus { --tin-grad: linear-gradient(180deg, #c7989a 0%, #7d4f50 100%); --tin-glow: rgba(199,152,154,0.5); }
+  .tin-reves { --tin-grad: linear-gradient(180deg, #8db1b3 0%, #4d6e72 100%); --tin-glow: rgba(141,177,179,0.5); }
+
+  /* ====== Big moon ====== */
+  .big-moon {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #f5ecdc, #c8c3b3 60%, #9ea089 90%);
+    box-shadow:
+      inset -40px -50px 70px rgba(42,49,56,0.45),
+      0 0 120px 30px rgba(247,241,230,0.5);
+    filter: blur(0.4px);
+  }
+  .big-moon::before, .big-moon::after {
+    content:''; position: absolute; border-radius: 50%;
+    background: rgba(42,49,56,0.06);
+  }
+  .big-moon::before { width: 18%; height: 18%; top: 22%; left: 30%; }
+  .big-moon::after  { width: 12%; height: 12%; top: 58%; left: 56%; }
+
+  /* ====== Decorative grids ====== */
+  .deco-grid {
+    background-image:
+      linear-gradient(rgba(200,181,138,0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,181,138,0.18) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  @media (max-width: 900px) {
+    .hide-md-down { display: none !important; }
+    .marquee__track { font-size: 34px; }
+    .marquee__track em { font-size: 30px; }
+    .cards-fan { height: 480px; }
+    .ritual-card { width: 200px; height: 300px; }
+  }
+
+  /* ====== Editorial sticky text ====== */
+  .editorial-text {
+    font-family: var(--f-display);
+    letter-spacing: -0.005em;
+    line-height: 0.9;
+  }
+
+  /* ====== Sparkles ====== */
+  .sparkle {
+    position: absolute; width: 5px; height: 5px; border-radius: 50%;
+    background: #fff; box-shadow: 0 0 12px rgba(255,255,255,0.85);
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100%{ opacity: 0.2; transform: scale(0.5);} 50%{ opacity: 1; transform: scale(1.4);} }
+</style>
+</head>
+
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader">
+  <div class="loader__seal">
+    <svg viewBox="0 0 160 160">
+      <defs>
+        <linearGradient id="lg1" x1="0" x2="1">
+          <stop offset="0%" stop-color="#ECDFB8"/>
+          <stop offset="100%" stop-color="#C8B58A"/>
+        </linearGradient>
+      </defs>
+      <circle cx="80" cy="80" r="76" fill="none" stroke="url(#lg1)" stroke-width="0.6" stroke-dasharray="2 5"/>
+      <circle cx="80" cy="80" r="62" fill="none" stroke="#C8B58A" stroke-width="0.4" stroke-dasharray="1 8"/>
+      <circle cx="80" cy="80" r="48" fill="none" stroke="#D8C79A" stroke-width="0.3"/>
+      <g font-family="Cormorant Garamond" font-size="16" fill="#C8B58A" text-anchor="middle">
+        <text x="80" y="16">✦</text>
+        <text x="148" y="86">✧</text>
+        <text x="80" y="154">✦</text>
+        <text x="12" y="86">✧</text>
+      </g>
+    </svg>
+    <div class="loader__core"></div>
+  </div>
+  <div class="loader__brand">Kusmi Tea <em>×</em> Astrokiff</div>
+  <div class="loader__label">Le Salon Céleste · Cinq Rituels</div>
+  <div class="loader__count" id="loader-count">0</div>
+</div>
+
+<script>
+(function(){
+  var loader = document.getElementById('loader');
+  var loaderCount = document.getElementById('loader-count');
+  var count = 0;
+  function tick(){
+    count += Math.random() * 9 + 2;
+    if (count >= 100){ count = 100; loaderCount.textContent = '100'; setTimeout(hideLoader, 350); return; }
+    loaderCount.textContent = Math.floor(count);
+    setTimeout(tick, 80);
+  }
+  function hideLoader(){
+    if (window.gsap){
+      window.gsap.to(loader, { opacity: 0, duration: 0.9, ease: 'power3.inOut', onComplete: function(){ loader.style.display = 'none'; if (typeof window.__intro === 'function') window.__intro(); } });
+    } else {
+      loader.style.transition = 'opacity .8s'; loader.style.opacity = '0';
+      setTimeout(function(){ loader.style.display = 'none'; if (typeof window.__intro === 'function') window.__intro(); }, 800);
+    }
+  }
+  setTimeout(function(){ if (loader && loader.style.display !== 'none') hideLoader(); }, 6000);
+  tick();
+})();
+</script>
+
+<!-- ============ NAV ============ -->
+<header class="fixed top-0 left-0 right-0 z-[1000]">
+  <div class="px-8 md:px-12 py-7 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-3 nav-link" style="color: var(--ink)">
+      <div class="w-7 h-7 rounded-full border border-current grid place-items-center">
+        <span class="text-[10px] font-semibold">K</span>
+      </div>
+      <div class="label-caps">Kusmi <span style="font-family: var(--f-script); font-style: italic; text-transform: lowercase; font-size: 13px; letter-spacing: 0;">×</span> Astrokiff · Salon Céleste</div>
+    </a>
+    <nav class="hide-md-down flex items-center gap-10 label-caps" style="color: var(--ink)">
+      <a href="#rituels" class="nav-link">Les Cinq</a>
+      <a href="#ritual" class="nav-link">Le Rituel</a>
+      <a href="#editorial" class="nav-link">Manifeste</a>
+      <a href="#final" class="nav-link">Salon</a>
+    </nav>
+    <div class="label-caps flex items-center gap-3" style="color: var(--ink)">
+      <span class="w-1.5 h-1.5 rounded-full" style="background: var(--gold-fine)"></span>
+      <span class="hide-md-down">Édition fictive · MMXXVI</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 · HERO ============ -->
+<section id="hero" class="relative min-h-screen overflow-hidden pt-24">
+  <div class="sky-1"></div>
+  <div class="paper"></div>
+  <div class="stars opacity-50"></div>
+  <canvas id="celest" class="absolute inset-0 z-[1] pointer-events-none"></canvas>
+
+  <!-- Decorative big floating moon (pushed off-canvas to not compete with title) -->
+  <div class="big-moon" style="width: 320px; height: 320px; top: -160px; right: -160px; opacity: 0.45; z-index: 1;"></div>
+
+  <!-- Floating SVG ornaments -->
+  <svg class="absolute top-[20%] left-[2%] w-[110px] float-y-slow" style="--r:-10deg; opacity: 0.55; z-index: 1;" viewBox="0 0 120 160">
+    <g fill="none" stroke="#C8B58A" stroke-width="0.7">
+      <path d="M60 5 Q56 50 60 100 Q64 145 60 155"/>
+      <ellipse cx="42" cy="40" rx="14" ry="6" transform="rotate(-30 42 40)" fill="rgba(166,192,191,0.6)"/>
+      <ellipse cx="78" cy="60" rx="14" ry="6" transform="rotate(30 78 60)" fill="rgba(166,192,191,0.6)"/>
+      <ellipse cx="42" cy="84" rx="14" ry="6" transform="rotate(-30 42 84)" fill="rgba(166,192,191,0.6)"/>
+      <ellipse cx="78" cy="108" rx="14" ry="6" transform="rotate(30 78 108)" fill="rgba(166,192,191,0.6)"/>
+    </g>
+    <g fill="rgba(231,207,206,0.85)" stroke="#C8B58A" stroke-width="0.6">
+      <circle cx="60" cy="16" r="11"/>
+      <circle cx="60" cy="16" r="5" fill="rgba(168,120,120,0.7)"/>
+    </g>
+  </svg>
+
+  <svg class="absolute top-[28%] right-[2%] w-[130px] float-y" style="--r:8deg; opacity: 0.55; z-index: 1;" viewBox="0 0 160 200">
+    <g fill="none" stroke="#C8B58A" stroke-width="0.7">
+      <path d="M80 195 Q72 130 80 80 Q88 30 80 5"/>
+    </g>
+    <g fill="rgba(239,217,216,0.85)" stroke="#C8B58A" stroke-width="0.6">
+      <ellipse cx="80" cy="40" rx="22" ry="20"/>
+      <ellipse cx="80" cy="40" rx="13" ry="11.5" fill="rgba(199,152,154,0.85)"/>
+      <ellipse cx="80" cy="40" rx="5" ry="5" fill="rgba(125,79,80,0.85)"/>
+    </g>
+    <g fill="rgba(166,192,191,0.7)" stroke="#C8B58A" stroke-width="0.5">
+      <ellipse cx="60" cy="82" rx="14" ry="6" transform="rotate(-30 60 82)"/>
+      <ellipse cx="100" cy="112" rx="14" ry="6" transform="rotate(30 100 112)"/>
+      <ellipse cx="62" cy="142" rx="14" ry="6" transform="rotate(-30 62 142)"/>
+    </g>
+  </svg>
+
+  <!-- Hanging crystal/pearl strand -->
+  <svg class="absolute top-0 left-[12%] w-[40px] h-[260px]" style="opacity: 0.5; z-index: 1;" viewBox="0 0 40 280">
+    <line x1="20" y1="0" x2="20" y2="240" stroke="#C8B58A" stroke-width="0.5"/>
+    <circle cx="20" cy="60" r="3.5" fill="#ECDFB8"/>
+    <circle cx="20" cy="105" r="3" fill="#D8C79A"/>
+    <circle cx="20" cy="150" r="3.5" fill="#ECDFB8"/>
+    <circle cx="20" cy="200" r="3" fill="#D8C79A"/>
+    <circle cx="20" cy="240" r="7" fill="rgba(217,210,227,0.85)" stroke="#C8B58A" stroke-width="0.6"/>
+    <circle cx="20" cy="260" r="2.5" fill="#C8B58A"/>
+  </svg>
+
+  <!-- Sparkles -->
+  <div class="absolute inset-0 z-[3] pointer-events-none">
+    <div class="sparkle" style="top:18%; left:22%; animation-delay:0s"></div>
+    <div class="sparkle" style="top:30%; left:78%; animation-delay:.6s"></div>
+    <div class="sparkle" style="top:64%; left:12%; animation-delay:1.2s"></div>
+    <div class="sparkle" style="top:74%; left:82%; animation-delay:1.8s"></div>
+    <div class="sparkle" style="top:12%; left:54%; animation-delay:2.4s"></div>
+    <div class="sparkle" style="top:84%; left:48%; animation-delay:.3s"></div>
+  </div>
+
+  <div class="relative z-[5] max-w-[1600px] mx-auto px-8 md:px-12">
+
+    <!-- Top label -->
+    <div class="flex items-center justify-between label-caps mb-6" style="color: var(--ink-soft)">
+      <div class="flex items-center gap-3">
+        <span class="w-1.5 h-1.5 rounded-full" style="background: var(--gold-fine)"></span>
+        <span>Édition rituelle · V cérémonies</span>
+      </div>
+      <div class="hide-md-down">Une collaboration fictive · 2026</div>
+      <div>Le Salon Céleste</div>
+    </div>
+
+    <!-- Title + cards -->
+    <div class="text-center reveal" id="heroBlock">
+      <div class="sec-tag justify-center mb-4 label-caps">
+        <span class="line"></span><span>Kusmi Tea</span>
+        <span class="script-italic" style="color: var(--gold-fine); font-size: 18px; letter-spacing: 0;">×</span>
+        <span>Astrokiff</span><span class="line"></span>
+      </div>
+
+      <h1 class="display text-[clamp(36px,5.4vw,84px)] leading-[1.02] max-w-[1200px] mx-auto" style="color: var(--ink)">
+        <span class="word"><span>Les</span></span>
+        <span class="word"><span class="script-italic" style="color: var(--gold-fine)">étoiles</span></span>
+        <span class="word"><span>ont préparé</span></span><br/>
+        <span class="word"><span>votre</span></span>
+        <span class="word"><span class="script-italic" style="color: var(--gold-fine)">rituel.</span></span>
+      </h1>
+
+      <p class="script-italic text-[clamp(16px,1.4vw,20px)] mt-5 max-w-[720px] mx-auto leading-relaxed" style="color: var(--ink-soft)">
+        Kusmi Tea et Astrokiff réinventent le thé comme une cérémonie céleste,<br class="hide-md-down"/>
+        inspirée de l'astrologie, de l'intuition et des rituels oniriques.
+      </p>
+
+      <!-- Cards fan -->
+      <div class="cards-fan mt-6" id="cardsFan">
+        <!-- 5 cards injected here -->
+      </div>
+
+      <!-- Hint + CTA -->
+      <div class="flex flex-col items-center gap-6 mt-2">
+        <p class="label-caps" style="color: var(--ink-soft)">Choisissez une carte · Le rituel se révèle</p>
+        <a href="#ritual" class="btn-celest" data-cta="enter">
+          <span>Entrer dans le rituel</span><span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<section class="relative z-10">
+  <div class="marquee">
+    <div class="marquee__track">
+      <span>Le Salon Céleste</span><span class="star">✦</span>
+      <em>five teas, five rituals</em><span class="star">✧</span>
+      <span>Kusmi × Astrokiff</span><span class="star">✦</span>
+      <em>brewed under the stars</em><span class="star">✧</span>
+      <span>Le Salon Céleste</span><span class="star">✦</span>
+      <em>five teas, five rituals</em><span class="star">✧</span>
+      <span>Kusmi × Astrokiff</span><span class="star">✦</span>
+      <em>brewed under the stars</em><span class="star">✧</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · RITUAL DETAIL (dynamic) ============ -->
+<section id="ritual" class="relative py-32 md:py-48 px-8 md:px-12 overflow-hidden transition-colors duration-1000" data-ritual-section>
+  <div class="absolute inset-0 z-0 transition-all duration-1000" id="ritualBg"></div>
+  <div class="paper"></div>
+
+  <!-- Floating ingredients (dynamic) -->
+  <div class="absolute inset-0 z-[1] pointer-events-none" id="ingredientsLayer"></div>
+
+  <div class="relative z-10 max-w-[1600px] mx-auto">
+
+    <div class="flex items-center justify-between mb-16 reveal">
+      <div class="sec-tag label-caps">
+        <span>II</span><span class="line"></span><span class="dot"></span><span>Révélation du Rituel</span>
+      </div>
+      <div class="label-caps hide-md-down" style="color: var(--ink-soft)">
+        <span id="ritualIndex">I / V</span>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-16 items-center">
+
+      <!-- Left: tin + ingredients -->
+      <div class="md:col-span-5">
+        <div class="relative">
+          <!-- Orbital decorations -->
+          <div class="absolute inset-[-20%] z-0 pointer-events-none" id="tinOrbits">
+            <svg viewBox="0 0 400 400" class="w-full h-full" style="animation: rotate 60s linear infinite">
+              <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(200,181,138,0.35)" stroke-width="0.6" stroke-dasharray="2 5"/>
+              <circle cx="200" cy="200" r="155" fill="none" stroke="rgba(200,181,138,0.25)" stroke-width="0.4" stroke-dasharray="1 8"/>
+            </svg>
+          </div>
+          <div class="absolute inset-[-15%] z-0 pointer-events-none">
+            <svg viewBox="0 0 400 400" class="w-full h-full" style="animation: rotate 45s linear infinite reverse">
+              <circle cx="200" cy="200" r="135" fill="none" stroke="rgba(42,49,56,0.18)" stroke-width="0.5"/>
+            </svg>
+          </div>
+
+          <div class="tin-celest tin-lune" id="ritualTin">
+            <div class="tin-celest__body">
+              <div class="tin-celest__face">
+                <div class="tin-celest__stars" id="tinStars"></div>
+                <div class="tin-celest__band">KUSMI × ASTROKIFF · SALON CÉLESTE</div>
+                <div class="tin-celest__label">
+                  <div class="tin-celest__glyph" id="tinGlyph">☾</div>
+                  <div class="tin-celest__name" id="tinName">Rituel de Pleine Lune</div>
+                  <div class="tin-celest__sub" id="tinSub">★ Camomille · Lavande ★</div>
+                </div>
+                <div class="tin-celest__band">N° I · ÉDITION RITUELLE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: details -->
+      <div class="md:col-span-7" id="ritualDetail">
+        <div class="label-caps mb-4" style="color: var(--ink-soft)" id="ritualNumber">Rituel · I</div>
+        <h2 class="display text-[clamp(48px,7vw,120px)] leading-[0.92]" style="color: var(--ink)" id="ritualTitle">
+          Rituel de<br/><span class="script-italic" style="color: var(--gold-fine)">Pleine Lune</span>
+        </h2>
+        <p class="script-italic text-[clamp(20px,1.6vw,28px)] mt-8 max-w-[640px] leading-snug" style="color: var(--ink-soft)" id="ritualLong">
+          Une infusion céleste imaginée pour les nuits d'intuition, de douceur et de connexion lunaire.
+        </p>
+
+        <!-- Notes -->
+        <div class="mt-10">
+          <div class="label-caps mb-4" style="color: var(--ink-soft)">Notes astrales</div>
+          <div class="flex flex-wrap gap-2" id="ritualNotes"></div>
+        </div>
+
+        <!-- Energy -->
+        <div class="mt-8">
+          <div class="label-caps mb-4" style="color: var(--ink-soft)">Énergie</div>
+          <div class="flex flex-wrap gap-2" id="ritualEnergy"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Steps + composition -->
+    <div class="grid md:grid-cols-12 gap-12 mt-32">
+
+      <!-- Steps -->
+      <div class="md:col-span-7 reveal">
+        <div class="label-caps mb-6" style="color: var(--ink-soft)">Comment préparer le rituel</div>
+        <h3 class="display text-[clamp(34px,4vw,68px)] mb-10" style="color: var(--ink)">
+          Cinq <span class="script-italic" style="color: var(--gold-fine)">gestes</span> pour traverser<br/>la cérémonie.
+        </h3>
+        <div id="ritualSteps">
+          <!-- step rows injected -->
+        </div>
+      </div>
+
+      <!-- Composition + moment -->
+      <div class="md:col-span-5 reveal">
+        <div class="panel-velvet p-10">
+          <div class="label-caps mb-3" style="color: var(--ink-soft)">Composition</div>
+          <h4 class="display text-[28px] mb-6" style="color: var(--ink)" id="ritualCompoTitle">Ingrédients célestes</h4>
+          <ul class="space-y-3 mb-10" id="ritualCompo">
+            <!-- li injected -->
+          </ul>
+
+          <div class="border-t pt-6" style="border-color: rgba(42,49,56,0.15)">
+            <div class="label-caps mb-3" style="color: var(--ink-soft)">Meilleur moment</div>
+            <p class="script-italic text-[18px] leading-relaxed" style="color: var(--ink)" id="ritualMoment">
+              À savourer lors des soirées de pleine lune, des journaling sessions ou des moments de calme et de connexion intérieure.
+            </p>
+          </div>
+
+          <a href="#" class="btn-celest mt-10 w-full justify-center" style="padding: 18px;">
+            <span>Commencer le rituel</span><span class="arr">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 03 · ASSOCIATED RITUALS ============ -->
+<section id="rituels" class="relative py-32 px-8 md:px-12 overflow-hidden">
+  <div class="sky-2"></div>
+  <div class="paper"></div>
+  <div class="stars opacity-40"></div>
+
+  <div class="relative z-10 max-w-[1600px] mx-auto">
+    <div class="flex items-end justify-between mb-16 reveal flex-wrap gap-8">
+      <div>
+        <div class="sec-tag label-caps mb-4">
+          <span>III</span><span class="line"></span><span class="dot"></span><span>Cinq Cérémonies</span>
+        </div>
+        <h2 class="display text-[clamp(48px,7vw,124px)] leading-[0.92]" style="color: var(--ink)">
+          Vous pourriez<br/>
+          aussi <span class="script-italic" style="color: var(--gold-fine)">aimer…</span>
+        </h2>
+      </div>
+      <p class="script-italic text-[20px] max-w-md" style="color: var(--ink-soft)">
+        Chaque rituel est un petit théâtre. Promenez-vous d'une scène à l'autre — votre tasse vous dira où aller ensuite.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6" id="relatedGrid">
+      <!-- 5 small cards injected -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · EDITORIAL ============ -->
+<section id="editorial" class="relative py-40 md:py-60 px-8 md:px-12 overflow-hidden">
+  <div class="sky-night"></div>
+  <div class="paper"></div>
+
+  <!-- Floating elements -->
+  <svg class="absolute top-[10%] right-[8%] w-[180px] opacity-70 float-y-slow" style="--r:-5deg" viewBox="0 0 200 200">
+    <g fill="none" stroke="#C8B58A" stroke-width="1.1">
+      <ellipse cx="100" cy="80" rx="60" ry="14" fill="rgba(247,241,230,0.2)"/>
+      <path d="M40 80 Q40 130 60 145 L140 145 Q160 130 160 80"/>
+      <path d="M40 80 L160 80"/>
+      <path d="M160 90 Q180 90 180 110 Q180 130 160 130"/>
+    </g>
+    <g fill="#ECDFB8">
+      <circle cx="85" cy="55" r="2.5"/>
+      <circle cx="100" cy="40" r="3"/>
+      <circle cx="115" cy="50" r="2.5"/>
+      <circle cx="95" cy="25" r="3.5"/>
+      <circle cx="120" cy="20" r="2.5"/>
+    </g>
+    <g stroke="#C8B58A" stroke-width="0.6" fill="none">
+      <path d="M85 55 L100 40 L115 50 M100 40 L95 25 M95 25 L120 20"/>
+    </g>
+  </svg>
+
+  <svg class="absolute bottom-[18%] left-[6%] w-[160px] opacity-70 float-y" style="--r:4deg" viewBox="0 0 160 200">
+    <g fill="rgba(247,241,230,0.95)" stroke="#C8B58A" stroke-width="0.7">
+      <path d="M70 195 Q60 150 65 110 L60 60 Q60 45 65 40 L70 35 Q78 32 82 38 L85 50 L85 30 Q86 25 92 25 Q98 25 99 30 L100 50 L102 30 Q103 25 109 26 Q115 27 115 33 L113 60 L116 50 Q118 45 124 46 Q130 47 130 53 L125 90 Q122 140 115 195 Z"/>
+    </g>
+    <g fill="#ECDFB8">
+      <circle cx="40" cy="40" r="3"/>
+      <circle cx="20" cy="60" r="2"/>
+      <circle cx="30" cy="90" r="2.5"/>
+      <circle cx="10" cy="100" r="2"/>
+    </g>
+    <g stroke="#C8B58A" stroke-width="0.5" fill="none">
+      <path d="M40 40 L20 60 L30 90 L10 100"/>
+    </g>
+  </svg>
+
+  <div class="big-moon" style="width: 280px; height: 280px; top: 8%; left: 30%; opacity: 0.55;"></div>
+
+  <div class="relative z-10 max-w-[1700px] mx-auto">
+
+    <div class="sec-tag label-caps mb-10 reveal" style="color: var(--ink-soft)">
+      <span>IV</span><span class="line"></span><span class="dot"></span><span>Le Manifeste</span>
+    </div>
+
+    <div class="editorial-text reveal">
+      <p class="text-[clamp(40px,10vw,200px)] leading-[0.92]" style="color: var(--ink)">
+        Entre <span class="script-italic" style="color: var(--gold-fine)">jardins</span><br/>
+        célestes<br/>
+        et <span class="script-italic" style="color: var(--gold-fine)">rituels</span> lunaires<wbr/>,<br/>
+        le thé devient<br/>
+        une <span class="script-italic" style="color: var(--gold-fine)">cérémonie</span>.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-12 mt-32 reveal">
+      <div class="md:col-span-5">
+        <div class="label-caps mb-4" style="color: var(--ink-soft)">Astrokiff Studio</div>
+        <h3 class="display text-[clamp(28px,3vw,44px)]" style="color: var(--ink)">
+          Cinq cérémonies. <span class="script-italic" style="color: var(--gold-fine)">Cinq</span> intentions.
+        </h3>
+      </div>
+      <div class="md:col-span-6 md:col-start-7">
+        <p class="text-[18px] leading-relaxed" style="color: var(--ink-soft); font-family: var(--f-body);">
+          Le Salon Céleste est une collaboration imaginaire entre Kusmi Tea et l'astrologue Astrokiff. Chaque mélange est composé comme une carte de tarot : un moment, une énergie, une intention. Les ingrédients ne sont pas choisis pour leur saveur seule, mais pour le geste qu'ils invitent à poser — allumer une bougie, écrire une lettre, regarder la lune se lever entre deux nuages.
+        </p>
+        <p class="script-italic text-[20px] leading-relaxed mt-6" style="color: var(--ink)">
+          « Le thé est ce qu'on a de plus proche de la lecture du ciel. Il faut le boire avant que la planète ne s'en aille sans nous. »
+        </p>
+        <div class="label-caps mt-4" style="color: var(--ink-soft)">— Astrokiff · Astrologue invitée</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 05 · FINAL ============ -->
+<section id="final" class="relative min-h-screen grid place-items-center overflow-hidden">
+  <div class="sky-rose"></div>
+  <div class="paper"></div>
+  <div class="stars opacity-50"></div>
+
+  <!-- Big central moon -->
+  <div class="big-moon" style="width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%,-55%); opacity: 0.85;"></div>
+
+  <!-- Floating ornaments -->
+  <svg class="absolute top-[14%] left-[10%] w-[120px] opacity-70 float-y" style="--r:-12deg" viewBox="0 0 100 100">
+    <g stroke="#C8B58A" stroke-width="0.7" fill="rgba(231,207,206,0.85)">
+      <ellipse cx="50" cy="50" rx="32" ry="28"/>
+      <ellipse cx="50" cy="50" rx="20" ry="17" fill="rgba(199,152,154,0.8)"/>
+      <ellipse cx="50" cy="50" rx="9" ry="8" fill="rgba(125,79,80,0.75)"/>
+    </g>
+  </svg>
+  <svg class="absolute bottom-[16%] right-[12%] w-[140px] opacity-75 float-y-slow" style="--r:12deg" viewBox="0 0 100 100">
+    <g stroke="#C8B58A" stroke-width="0.7" fill="rgba(247,241,230,0.8)">
+      <ellipse cx="50" cy="50" rx="36" ry="32"/>
+      <ellipse cx="50" cy="50" rx="22" ry="20" fill="rgba(231,207,206,0.7)"/>
+      <ellipse cx="50" cy="50" rx="10" ry="9" fill="rgba(199,152,154,0.7)"/>
+    </g>
+  </svg>
+
+  <!-- Petals raining -->
+  <div class="absolute inset-0" id="petalRain"></div>
+
+  <div class="relative z-10 text-center px-8 max-w-[1500px]">
+    <div class="sec-tag justify-center label-caps mb-10">
+      <span class="line"></span><span class="dot"></span>
+      <span>Le Final · Cérémonie</span>
+      <span class="dot"></span><span class="line"></span>
+    </div>
+
+    <h2 class="display leading-[0.92] text-[clamp(72px,14vw,280px)]" style="color: var(--ink)">
+      <span class="word"><span>Infusez</span></span><br/>
+      <span class="word"><span>votre</span></span>
+      <span class="word"><span class="script-italic" style="color: var(--gold-fine)">destinée.</span></span>
+    </h2>
+
+    <p class="script-italic text-[clamp(20px,2vw,28px)] mt-10 max-w-[700px] mx-auto leading-relaxed" style="color: var(--ink-soft)">
+      Cinq rituels, cinq tasses, cinq étoiles.<br/>
+      Le ciel a déjà choisi la vôtre — il ne reste qu'à la boire.
+    </p>
+
+    <div class="flex items-center justify-center gap-5 mt-14 flex-wrap">
+      <a href="#rituels" class="btn-celest">
+        <span>Explorer tous les rituels</span><span class="arr">→</span>
+      </a>
+      <a href="#hero" class="btn-soft">
+        <span>Entrer dans le salon céleste</span>
+      </a>
+    </div>
+
+    <div class="mt-20 flex items-center justify-center gap-6 label-caps flex-wrap" style="color: var(--ink-soft)">
+      <span>Édition fictive · Cinq tisanes rituelles</span>
+      <span class="w-1 h-1 rounded-full" style="background: var(--gold-fine)"></span>
+      <span>Une rêverie Kusmi Tea × Astrokiff</span>
+      <span class="w-1 h-1 rounded-full" style="background: var(--gold-fine)"></span>
+      <span>Paris · MMXXVI</span>
+    </div>
+  </div>
+
+  <footer class="absolute bottom-0 left-0 right-0 z-10 px-8 md:px-12 py-8 flex items-center justify-between label-caps border-t" style="color: var(--ink-soft); border-color: rgba(42,49,56,0.15);">
+    <div>© MMXXVI · Kusmi Tea Paris · Concept</div>
+    <div class="hide-md-down">Une collaboration fictive imaginée pour les étoiles</div>
+    <div class="flex gap-6">
+      <a href="#" class="nav-link">Instagram</a>
+      <a href="#" class="nav-link">Newsletter</a>
+      <a href="#" class="nav-link">Salon</a>
+    </div>
+  </footer>
+</section>
+
+<!-- ============ SCRIPT ============ -->
+<script type="module">
+import * as THREE from 'three';
+
+/* ===== Lenis (tolerant of failed CDN) ===== */
+let lenis = null;
+try {
+  if (typeof Lenis !== 'undefined') {
+    lenis = new Lenis({ duration: 1.3, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+} catch (e) { console.warn('Lenis init failed, using native scroll', e); lenis = null; }
+gsap.registerPlugin(ScrollTrigger);
+if (lenis) lenis.on('scroll', ScrollTrigger.update);
+
+/* ===== Cursor ===== */
+const cursor = document.getElementById('cursor');
+let mx = window.innerWidth/2, my = window.innerHeight/2, cx = mx, cy = my;
+window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function cursorLoop(){
+  cx += (mx - cx) * 0.22;
+  cy += (my - cy) * 0.22;
+  cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+  requestAnimationFrame(cursorLoop);
+}
+cursorLoop();
+function bindCursor(els, cls){
+  els.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add(cls));
+    el.addEventListener('mouseleave', () => cursor.classList.remove(cls));
+  });
+}
+bindCursor(document.querySelectorAll('a, button'), 'hover');
+
+/* ===== Data ===== */
+const RITUALS = [
+  {
+    id: 'lune', roman: 'I', world: 'lune', tin: 'tin-lune',
+    title: 'Rituel de Pleine Lune',
+    titleUpper: 'RITUEL DE PLEINE LUNE',
+    subtitle: 'Infusion florale apaisante',
+    long: 'Une infusion céleste imaginée pour les nuits d\'intuition, de douceur et de connexion lunaire.',
+    glyph: '☾',
+    accent: '#8a7ba0', bg1: '#e6dcec', bg2: '#cdc0d8',
+    notes: ['Camomille', 'Fleurs blanches', 'Vanille', 'Lavande'],
+    energy: ['Apaisante', 'Féminine', 'Intuitive', 'Onirique'],
+    composition: [
+      ['Camomille séchée', '· Romaine'],
+      ['Pétales de lavande', '· Provence'],
+      ['Gousse de vanille', '· Madagascar'],
+      ['Fleur de tiaré', '· Polynésie'],
+      ['Poudre de nacre', '· Lunaire']
+    ],
+    moment: 'À savourer lors des soirées de pleine lune, des journaling sessions ou des moments de calme et de connexion intérieure.',
+    steps: [
+      ['Allumer une bougie', 'rituel d\'ouverture'],
+      ['Laisser infuser le thé 4 minutes', '78°C'],
+      ['Tirer une carte de tarot', 'écouter le signe'],
+      ['Écrire ses intentions', 'trois lignes'],
+      ['Déguster sous la lumière de la lune', 'fenêtre ouverte']
+    ],
+    ingredients: ['🌙', '✿', '✦', '❀', '✧']
+  },
+  {
+    id: 'tarot', roman: 'II', world: 'tarot', tin: 'tin-tarot',
+    title: 'Rituel de Tirage de Tarot',
+    titleUpper: 'RITUEL DE TIRAGE DE TAROT',
+    subtitle: 'Infusion épicée et profonde',
+    long: 'Un mélange divinatoire pour les soirées de lecture, de divination et de mystère partagé.',
+    glyph: '✶',
+    accent: '#6f8077', bg1: '#cdd9d8', bg2: '#aebdb8',
+    notes: ['Cardamome', 'Cannelle', 'Encens', 'Tabac doux'],
+    energy: ['Intuitive', 'Mystérieuse', 'Profonde', 'Initiatique'],
+    composition: [
+      ['Thé noir Pu-erh', '· Yunnan'],
+      ['Cannelle de Ceylan', '· Sri Lanka'],
+      ['Cardamome verte', '· Inde'],
+      ['Anis étoilé', '· Chine'],
+      ['Pétales d\'œillet', '· Provence']
+    ],
+    moment: 'À siroter avant un tirage, lors d\'une nuit de pleine lune ou pendant une cérémonie de divination intime.',
+    steps: [
+      ['Brûler de l\'encens', 'sauge ou benjoin'],
+      ['Mélanger les feuilles trois fois', 'sens anti-horaire'],
+      ['Tirer trois cartes', 'passé · présent · vœu'],
+      ['Boire à petites gorgées', 'entre chaque carte'],
+      ['Écouter les signes', 'jusqu\'à la dernière goutte']
+    ],
+    ingredients: ['✶', '☽', '✦', '✧', '✷']
+  },
+  {
+    id: 'matin', roman: 'III', world: 'matin', tin: 'tin-matin',
+    title: 'Énergie Cosmique du Matin',
+    titleUpper: 'ÉNERGIE COSMIQUE DU MATIN',
+    subtitle: 'Infusion fraîche et dynamisante',
+    long: 'Un éveil solaire pour commencer la journée sous une étoile chanceuse et un soleil bien aligné.',
+    glyph: '☉',
+    accent: '#b08f5c', bg1: '#f3ead4', bg2: '#e8d2b8',
+    notes: ['Yuzu', 'Gingembre', 'Citron vert', 'Verveine'],
+    energy: ['Solaire', 'Tonique', 'Lumineuse', 'Joyeuse'],
+    composition: [
+      ['Thé vert Sencha', '· Uji'],
+      ['Zeste de yuzu', '· Kochi'],
+      ['Gingembre frais', '· Madagascar'],
+      ['Verveine citronnée', '· Provence'],
+      ['Or comestible', '· 23 carats']
+    ],
+    moment: 'Le matin, au lever du jour, juste après les trois saluts au soleil et avant la première pensée du jour.',
+    steps: [
+      ['Saluer le soleil', 'fenêtre orientée Est'],
+      ['Verser l\'eau à 80°', 'sans à-coups'],
+      ['Infuser 2 minutes', 'pas une de plus'],
+      ['Respirer la vapeur', 'trois souffles'],
+      ['Boire face à l\'Est', 'avant tout regard']
+    ],
+    ingredients: ['☉', '✦', '❀', '✧', '✶']
+  },
+  {
+    id: 'venus', roman: 'IV', world: 'venus', tin: 'tin-venus',
+    title: 'Rituel d\'Amour de Vénus',
+    titleUpper: 'RITUEL D\'AMOUR DE VÉNUS',
+    subtitle: 'Infusion florale douce et romantique',
+    long: 'Une potion vénusienne pour les histoires d\'amour anciennes, à venir, ou simplement avec soi-même.',
+    glyph: '♀',
+    accent: '#a87878', bg1: '#f0d9d8', bg2: '#d7b8b5',
+    notes: ['Rose', 'Pivoine', 'Litchi', 'Miel'],
+    energy: ['Sensuelle', 'Tendre', 'Romantique', 'Douce'],
+    composition: [
+      ['Thé blanc Pai Mu Tan', '· Fujian'],
+      ['Pétales de rose', '· Damas'],
+      ['Pivoine séchée', '· Jardin Impérial'],
+      ['Litchi confit', '· Guangdong'],
+      ['Cœur de sureau', '· Champagne']
+    ],
+    moment: 'Lors des rendez-vous, des bains parfumés, des soirées de gratitude — ou simplement pour s\'écrire une lettre.',
+    steps: [
+      ['Tracer un cœur dans la tasse', 'avec l\'index'],
+      ['Verser l\'eau à 75°', 'lentement'],
+      ['Infuser 3 minutes', 'paupières closes'],
+      ['Prononcer un vœu', 'à voix basse'],
+      ['Partager — ou non — la tasse', 'choisir avec soin']
+    ],
+    ingredients: ['♀', '❀', '✿', '✦', '✧']
+  },
+  {
+    id: 'reves', roman: 'V', world: 'reves', tin: 'tin-reves',
+    title: 'Rituel des Rêves',
+    titleUpper: 'RITUEL DES RÊVES',
+    subtitle: 'Infusion relaxante du soir',
+    long: 'Un voile de sommeil pour traverser les nuits comme une dormeuse de la Renaissance.',
+    glyph: '☽',
+    accent: '#6a8a96', bg1: '#cee0de', bg2: '#a6c0bf',
+    notes: ['Verveine', 'Tilleul', 'Pavot', 'Iris bleu'],
+    energy: ['Apaisante', 'Onirique', 'Profonde', 'Nocturne'],
+    composition: [
+      ['Tilleul de l\'Ariège', '· Pyrénées'],
+      ['Verveine du Velay', '· Auvergne'],
+      ['Pétales de pavot', '· Champ d\'été'],
+      ['Iris bleu de Florence', '· Toscane'],
+      ['Étoiles séchées', '· poétique']
+    ],
+    moment: 'Une heure avant le coucher, lors des nuits sans lune, ou avant un voyage onirique particulièrement attendu.',
+    steps: [
+      ['Tamiser la lumière', 'une bougie unique'],
+      ['Verser l\'eau à 80°', 'sans hâte'],
+      ['Infuser 5 minutes', 'fermer les yeux'],
+      ['Noter trois souhaits', 'sur papier libre'],
+      ['Glisser sous les étoiles', 'plier le carnet']
+    ],
+    ingredients: ['☽', '✦', '✧', '✶', '❀']
+  }
+];
+
+let activeIdx = 0;
+
+/* ===== Build 5 ritual cards in the hero fan ===== */
+const cardsFan = document.getElementById('cardsFan');
+
+// Card art per ritual (inline SVG)
+function cardArt(rit){
+  switch (rit.id){
+    case 'lune': return `
+      <svg viewBox="0 0 200 200" fill="none">
+        <defs>
+          <radialGradient id="moonG" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.95"/>
+            <stop offset="60%" stop-color="#e6dcec"/>
+            <stop offset="100%" stop-color="#8a7ba0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="92" r="64" fill="url(#moonG)"/>
+        <circle cx="100" cy="92" r="64" fill="none" stroke="#8a7ba0" stroke-width="0.6" stroke-dasharray="2 4"/>
+        <circle cx="80" cy="80" r="6" fill="rgba(58,50,71,0.15)"/>
+        <circle cx="118" cy="100" r="4" fill="rgba(58,50,71,0.12)"/>
+        <g fill="#8a7ba0">
+          <circle cx="40" cy="40" r="2"/>
+          <circle cx="160" cy="50" r="2.5"/>
+          <circle cx="170" cy="150" r="2"/>
+          <circle cx="30" cy="170" r="2.5"/>
+          <circle cx="60" cy="160" r="1.5"/>
+        </g>
+        <g stroke="#8a7ba0" stroke-width="0.4" fill="none" opacity="0.6">
+          <path d="M40 40 L160 50 L170 150 L30 170 L40 40"/>
+        </g>
+      </svg>`;
+    case 'tarot': return `
+      <svg viewBox="0 0 200 200" fill="none">
+        <g transform="rotate(-12 100 100)">
+          <rect x="60" y="35" width="80" height="130" rx="4" fill="rgba(247,241,230,0.95)" stroke="#6f8077" stroke-width="1"/>
+          <rect x="66" y="41" width="68" height="118" rx="2" fill="none" stroke="#6f8077" stroke-width="0.5"/>
+          <text x="100" y="115" text-anchor="middle" font-family="Cormorant Garamond" font-size="56" fill="#6f8077">★</text>
+          <text x="100" y="55" text-anchor="middle" font-family="Cormorant Garamond" font-size="10" letter-spacing="2" fill="#6f8077">L'ÉTOILE</text>
+          <text x="100" y="150" text-anchor="middle" font-family="Cormorant Garamond" font-size="9" letter-spacing="2" fill="#6f8077">XVII</text>
+        </g>
+        <g fill="#6f8077" opacity="0.6">
+          <circle cx="30" cy="30" r="1.5"/><circle cx="170" cy="40" r="2"/>
+          <circle cx="180" cy="170" r="1.5"/><circle cx="20" cy="180" r="2"/>
+        </g>
+      </svg>`;
+    case 'matin': return `
+      <svg viewBox="0 0 200 200" fill="none">
+        <defs>
+          <radialGradient id="sunG" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fffaeb"/>
+            <stop offset="50%" stop-color="#e8d2b8"/>
+            <stop offset="100%" stop-color="#b08f5c"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="115" r="50" fill="url(#sunG)"/>
+        <g stroke="#b08f5c" stroke-width="0.8" fill="none">
+          <line x1="100" y1="50" x2="100" y2="30"/>
+          <line x1="100" y1="180" x2="100" y2="200"/>
+          <line x1="35" y1="115" x2="15" y2="115"/>
+          <line x1="165" y1="115" x2="185" y2="115"/>
+          <line x1="55" y1="70" x2="40" y2="55"/>
+          <line x1="145" y1="70" x2="160" y2="55"/>
+          <line x1="55" y1="160" x2="40" y2="175"/>
+          <line x1="145" y1="160" x2="160" y2="175"/>
+        </g>
+        <ellipse cx="58" cy="60" rx="14" ry="10" fill="rgba(176,143,92,0.4)" stroke="#b08f5c" stroke-width="0.5"/>
+        <ellipse cx="148" cy="40" rx="10" ry="8" fill="rgba(176,143,92,0.4)" stroke="#b08f5c" stroke-width="0.5"/>
+      </svg>`;
+    case 'venus': return `
+      <svg viewBox="0 0 200 200" fill="none">
+        <g stroke="#a87878" stroke-width="0.8">
+          <ellipse cx="100" cy="100" rx="56" ry="50" fill="rgba(239,217,216,0.95)"/>
+          <ellipse cx="100" cy="100" rx="36" ry="32" fill="rgba(199,152,154,0.95)"/>
+          <ellipse cx="100" cy="100" rx="20" ry="18" fill="rgba(125,79,80,0.85)"/>
+          <ellipse cx="100" cy="100" rx="8" ry="7" fill="rgba(74,44,44,0.85)"/>
+        </g>
+        <g stroke="#a87878" stroke-width="0.7" fill="none">
+          <path d="M50 130 Q40 165 60 180"/>
+          <path d="M150 130 Q160 165 140 180"/>
+        </g>
+        <g stroke="#a87878" stroke-width="0.6" fill="rgba(166,192,164,0.7)">
+          <ellipse cx="44" cy="158" rx="14" ry="6" transform="rotate(-30 44 158)"/>
+          <ellipse cx="156" cy="158" rx="14" ry="6" transform="rotate(30 156 158)"/>
+        </g>
+      </svg>`;
+    case 'reves': return `
+      <svg viewBox="0 0 200 200" fill="none">
+        <defs>
+          <mask id="moonMaskR"><rect width="200" height="200" fill="white"/><circle cx="80" cy="90" r="40" fill="black"/></mask>
+        </defs>
+        <circle cx="100" cy="100" r="42" fill="rgba(247,241,230,0.85)" mask="url(#moonMaskR)" stroke="#6a8a96" stroke-width="0.6"/>
+        <g fill="#6a8a96">
+          <circle cx="40" cy="40" r="2.5"/>
+          <circle cx="170" cy="50" r="3"/>
+          <circle cx="160" cy="160" r="2"/>
+          <circle cx="30" cy="170" r="2.5"/>
+          <circle cx="65" cy="65" r="1.5"/>
+          <circle cx="155" cy="100" r="1.5"/>
+        </g>
+        <g stroke="#6a8a96" stroke-width="0.4" fill="none" opacity="0.7">
+          <path d="M40 40 L65 65 L155 100 L170 50"/>
+          <path d="M30 170 L160 160"/>
+        </g>
+        <g stroke="#6a8a96" stroke-width="0.6" fill="none" opacity="0.5">
+          <path d="M20 130 Q40 122 60 130 Q80 138 100 132"/>
+          <path d="M100 80 Q120 72 140 80 Q160 88 180 84"/>
+        </g>
+      </svg>`;
+  }
+  return '';
+}
+
+// Cards are flex-positioned by CSS — JS only adds tiny parallax / hover deltas
+const cardState = [];
+
+function buildCards(){
+  cardsFan.innerHTML = '';
+  RITUALS.forEach((r, i) => {
+    const card = document.createElement('button');
+    card.className = `ritual-card world-${r.world}`;
+    card.dataset.idx = i;
+    card.innerHTML = `
+      <span class="ritual-card__corner">N° ${r.roman}</span>
+      <div class="ritual-card__inner">
+        <div class="ritual-card__roman">${r.roman}</div>
+        <div class="ritual-card__art">${cardArt(r)}</div>
+        <div>
+          <div class="ritual-card__title">${r.title}</div>
+          <div class="ritual-card__sub">${r.subtitle}</div>
+        </div>
+      </div>
+      <span class="ritual-card__corner-bottom">${r.id}</span>
+    `;
+    cardsFan.appendChild(card);
+    cardState[i] = { x: 0, y: 0, s: 1, hovered: false, pulsing: false };
+  });
+}
+buildCards();
+const cardEls = cardsFan.querySelectorAll('.ritual-card');
+
+bindCursor(cardEls, 'card');
+
+/* Mouse parallax + smooth lerp for cards */
+let pmx = 0, pmy = 0;
+window.addEventListener('mousemove', e => {
+  pmx = (e.clientX / window.innerWidth - 0.5);
+  pmy = (e.clientY / window.innerHeight - 0.5);
+});
+function lerp(a, b, t){ return a + (b - a) * t; }
+function cardsParallaxLoop(){
+  const t = performance.now() / 1000;
+  cardEls.forEach((c, i) => {
+    const st = cardState[i];
+    const ph = i * 1.1;
+    const floatY = Math.sin(t * 0.9 + ph) * 4;
+
+    let targetX, targetY, targetS;
+    if (st.pulsing){
+      targetX = pmx * 6; targetY = -32; targetS = 1.08;
+    } else if (st.hovered){
+      targetX = pmx * 12; targetY = -22 + pmy * 4; targetS = 1.06;
+    } else {
+      targetX = pmx * 12;
+      targetY = floatY + pmy * 6;
+      targetS = 1;
+    }
+    const k = 0.13;
+    st.x = lerp(st.x, targetX, k);
+    st.y = lerp(st.y, targetY, k);
+    st.s = lerp(st.s, targetS, k);
+    c.style.transform = `translate(${st.x}px, ${st.y}px) scale(${st.s})`;
+    c.style.zIndex = st.pulsing ? 31 : (st.hovered ? 30 : 10);
+  });
+  requestAnimationFrame(cardsParallaxLoop);
+}
+cardsParallaxLoop();
+
+/* Hover state + click reveal */
+cardEls.forEach((c, i) => {
+  c.addEventListener('mouseenter', () => { cardState[i].hovered = true; });
+  c.addEventListener('mouseleave', () => { cardState[i].hovered = false; });
+  c.addEventListener('click', () => revealRitual(parseInt(c.dataset.idx, 10)));
+});
+
+/* ===== Ritual reveal ===== */
+const ritualBg = document.getElementById('ritualBg');
+const ritualSection = document.getElementById('ritual');
+
+function applyRitualBg(r){
+  ritualBg.style.background = `
+    radial-gradient(ellipse 70% 50% at 20% 20%, ${hexA(r.bg1, 0.95)}, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 80% 80%, ${hexA(r.bg2, 0.92)}, transparent 70%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, ${hexA(r.bg1, 0.55)}, transparent 80%),
+    linear-gradient(180deg, ${r.bg1} 0%, ${r.bg2} 100%)`;
+}
+function hexA(hex, a){
+  const h = hex.replace('#','');
+  const r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function selectRitual(idx, animate = true){
+  const r = RITUALS[idx];
+  activeIdx = idx;
+
+  // Visuals
+  applyRitualBg(r);
+
+  // Tin
+  const tin = document.getElementById('ritualTin');
+  tin.className = `tin-celest ${r.tin}`;
+  document.getElementById('tinGlyph').textContent = r.glyph;
+  document.getElementById('tinName').textContent = r.titleUpper;
+  document.getElementById('tinSub').textContent = `★ ${r.notes.slice(0,2).join(' · ')} ★`;
+
+  // Tin stars
+  const ts = document.getElementById('tinStars');
+  ts.innerHTML = '';
+  for (let i=0;i<14;i++){
+    const s = document.createElement('i');
+    s.style.top = `${10 + Math.random()*80}%`;
+    s.style.left = `${5 + Math.random()*90}%`;
+    ts.appendChild(s);
+  }
+
+  // Detail
+  document.getElementById('ritualNumber').textContent = `Rituel · N° ${r.roman}`;
+  document.getElementById('ritualIndex').textContent = `${r.roman} / V`;
+  const titleSplit = r.titleUpper.replace('RITUEL DE PLEINE LUNE','Rituel de|Pleine Lune')
+    .replace('RITUEL DE TIRAGE DE TAROT','Rituel de|Tirage de Tarot')
+    .replace('ÉNERGIE COSMIQUE DU MATIN','Énergie|Cosmique du Matin')
+    .replace('RITUEL D\'AMOUR DE VÉNUS','Rituel d\'amour|de Vénus')
+    .replace('RITUEL DES RÊVES','Rituel|des Rêves').split('|');
+  document.getElementById('ritualTitle').innerHTML = `${titleSplit[0]}<br/><span class="script-italic" style="color: ${r.accent}">${titleSplit[1]}</span>`;
+  document.getElementById('ritualLong').textContent = r.long;
+
+  // Notes
+  const notesEl = document.getElementById('ritualNotes');
+  notesEl.innerHTML = r.notes.map(n => `<span class="chip-celest">${n}</span>`).join('');
+
+  // Energy
+  const enEl = document.getElementById('ritualEnergy');
+  enEl.innerHTML = r.energy.map(n => `<span class="chip-celest" style="border-color: ${r.accent}; color: ${r.accent};">${n}</span>`).join('');
+
+  // Steps
+  const stepsEl = document.getElementById('ritualSteps');
+  stepsEl.innerHTML = r.steps.map((s, i) => `
+    <div class="step-row">
+      <div class="step-num">0${i+1}</div>
+      <div class="step-text">${s[0]}</div>
+      <div class="step-meta">${s[1]}</div>
+    </div>
+  `).join('');
+
+  // Composition
+  const cEl = document.getElementById('ritualCompo');
+  cEl.innerHTML = r.composition.map(ing => `
+    <li class="flex items-baseline justify-between gap-4 text-[15px]" style="color: var(--ink); font-family: var(--f-body);">
+      <span style="font-family: var(--f-display); font-size: 22px;">${ing[0]}</span>
+      <span class="label-caps" style="color: var(--ink-soft)">${ing[1]}</span>
+    </li>
+  `).join('');
+
+  document.getElementById('ritualMoment').textContent = r.moment;
+
+  // Active card
+  cardEls.forEach(c => c.classList.toggle('is-active', parseInt(c.dataset.idx,10) === idx));
+
+  // Floating ingredients in bg
+  const ing = document.getElementById('ingredientsLayer');
+  ing.innerHTML = '';
+  for (let i=0;i<10;i++){
+    const symb = r.ingredients[i % r.ingredients.length];
+    const span = document.createElement('span');
+    span.textContent = symb;
+    span.style.position = 'absolute';
+    span.style.top = `${10 + Math.random()*80}%`;
+    span.style.left = `${4 + Math.random()*92}%`;
+    span.style.fontFamily = 'Cormorant Garamond, serif';
+    span.style.fontSize = `${20 + Math.random()*40}px`;
+    span.style.color = r.accent;
+    span.style.opacity = `${0.18 + Math.random()*0.35}`;
+    span.style.transform = `rotate(${Math.random()*60-30}deg)`;
+    span.style.animation = `floatY ${8 + Math.random()*6}s ease-in-out infinite`;
+    span.style.animationDelay = `${-Math.random()*8}s`;
+    ing.appendChild(span);
+  }
+
+  if (animate){
+    gsap.fromTo('#ritualDetail', { x: 30, opacity: 0.2 }, { x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' });
+    gsap.fromTo('#ritualTin', { scale: 0.9, opacity: 0.3 }, { scale: 1, opacity: 1, duration: 1.1, ease: 'power3.out' });
+    gsap.fromTo('.step-row', { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out', delay: 0.1 });
+  }
+}
+
+let isRevealing = false;
+function revealRitual(idx){
+  if (isRevealing) return;
+  isRevealing = true;
+
+  // Update ritual content immediately so it's ready when scroll arrives
+  selectRitual(idx);
+
+  // Mark the clicked card so the parallax loop gives it a subtle pulse lift
+  cardState.forEach((st, i) => { st.pulsing = (i === idx); });
+  const card = cardEls[idx];
+  const rect = card.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+
+  // Particle burst — golden, subtle, on-brand
+  const burst = document.createElement('div');
+  Object.assign(burst.style, { position:'fixed', inset: 0, zIndex: 8999, pointerEvents:'none' });
+  document.body.appendChild(burst);
+  for (let i=0;i<28;i++){
+    const p = document.createElement('div');
+    Object.assign(p.style, {
+      position:'absolute', width:'3px', height:'3px', borderRadius:'50%',
+      background:'#D8C79A', boxShadow:'0 0 10px #ECDFB8',
+      left: cx+'px', top: cy+'px', willChange:'transform,opacity'
+    });
+    burst.appendChild(p);
+    const ang = Math.random()*Math.PI*2;
+    const dist = 140 + Math.random()*220;
+    gsap.to(p, {
+      x: Math.cos(ang)*dist, y: Math.sin(ang)*dist,
+      opacity: 0, scale: 0.3,
+      duration: 1.1 + Math.random()*0.6, ease: 'power2.out'
+    });
+  }
+  setTimeout(() => burst.remove(), 1900);
+
+  // Fade other cards
+  cardEls.forEach((c, i) => {
+    if (i !== idx) gsap.to(c, { opacity: 0.25, duration: 0.5, ease: 'power2.out' });
+  });
+
+  // Smooth scroll to ritual section
+  setTimeout(() => {
+    if (lenis && lenis.scrollTo) {
+      lenis.scrollTo('#ritual', { offset: -40, duration: 1.4 });
+    } else {
+      document.getElementById('ritual').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, 280);
+
+  // Reset card states after scroll completes
+  setTimeout(() => {
+    cardState.forEach((st) => { st.pulsing = false; });
+    cardEls.forEach((c) => gsap.to(c, { opacity: 1, duration: 0.7, ease: 'power2.out' }));
+    isRevealing = false;
+  }, 2000);
+}
+
+selectRitual(0, false);
+
+/* ===== Build related cards (small) ===== */
+const relatedGrid = document.getElementById('relatedGrid');
+function buildRelated(){
+  relatedGrid.innerHTML = '';
+  RITUALS.forEach((r, i) => {
+    const card = document.createElement('button');
+    card.className = `ritual-card world-${r.world}`;
+    card.dataset.idx = i;
+    card.style.width = '100%';
+    card.style.height = '320px';
+    card.style.position = 'relative';
+    card.style.transform = 'none';
+    card.innerHTML = `
+      <span class="ritual-card__corner">N° ${r.roman}</span>
+      <div class="ritual-card__inner">
+        <div class="ritual-card__roman">${r.roman}</div>
+        <div class="ritual-card__art">${cardArt(r)}</div>
+        <div>
+          <div class="ritual-card__title" style="font-size: 16px;">${r.title}</div>
+          <div class="ritual-card__sub" style="font-size:12px;">${r.subtitle}</div>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', () => revealRitual(i));
+    relatedGrid.appendChild(card);
+  });
+  bindCursor(relatedGrid.querySelectorAll('.ritual-card'), 'card');
+}
+buildRelated();
+
+/* ===== THREE.JS · subtle particle field ===== */
+const canvas = document.getElementById('celest');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
+renderer.setSize(window.innerWidth, window.innerHeight);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 200);
+camera.position.set(0, 0, 14);
+
+function makeStars(count, radius, size, color, opacity){
+  const g = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++){
+    const r = radius * (0.5 + Math.random() * 0.5);
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    pos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+    pos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+    pos[i*3+2] = r * Math.cos(phi);
+  }
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({ color, size, transparent: true, opacity, depthWrite: false, sizeAttenuation: true });
+  return new THREE.Points(g, mat);
+}
+const dust1 = makeStars(700, 40, 0.05, 0xC8B58A, 0.55);
+const dust2 = makeStars(420, 22, 0.07, 0xD9D2E3, 0.5);
+const dust3 = makeStars(140, 12, 0.10, 0xE6CFCE, 0.6);
+scene.add(dust1, dust2, dust3);
+
+const clock = new THREE.Clock();
+function render(){
+  const t = clock.getElapsedTime();
+  dust1.rotation.y = t * 0.015;
+  dust2.rotation.y = -t * 0.025;
+  dust2.rotation.x = t * 0.012;
+  dust3.rotation.y = t * 0.04;
+  dust3.rotation.z = t * 0.02;
+  camera.position.x += (pmx * 0.4 - camera.position.x) * 0.04;
+  camera.position.y += (-pmy * 0.3 - camera.position.y) * 0.04;
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+  requestAnimationFrame(render);
+}
+render();
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+/* ===== Intro ===== */
+// Set initial hidden state synchronously so words don't flash visible before intro
+gsap.set('h1.display .word > span', { yPercent: 110 });
+gsap.set('#hero p.script-italic, #hero .btn-celest', { opacity: 0, y: 20 });
+// scroll-hint already uses translateX(-50%) in CSS — animate opacity only
+gsap.set('.scroll-hint', { opacity: 0 });
+gsap.set('header', { opacity: 0, y: -30 });
+// Cards start hidden — the parallax loop's lerp will animate them in once we set state.s back up
+cardEls.forEach((c) => { gsap.set(c, { opacity: 0 }); });
+
+function intro(){
+  const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+  tl.to('header', { y: 0, opacity: 1, duration: 1.2 }, 0);
+  tl.to('h1.display .word > span', { yPercent: 0, stagger: 0.06, duration: 1.4 }, 0.1);
+  tl.to('#hero p.script-italic', { opacity: 1, y: 0, duration: 1.2 }, 0.6);
+  tl.to('#hero .btn-celest', { opacity: 1, y: 0, duration: 1 }, 0.9);
+  tl.to('.scroll-hint', { opacity: 1, duration: 1 }, 1.0);
+  tl.to(cardEls, { opacity: 1, duration: 0.9, stagger: 0.06, ease: 'power2.out' }, 0.5);
+}
+window.__intro = intro;
+const _ld = document.getElementById('loader');
+if (!_ld || _ld.style.display === 'none') intro();
+
+/* ===== Reveal on scroll ===== */
+document.querySelectorAll('.reveal').forEach(el => {
+  ScrollTrigger.create({ trigger: el, start: 'top 85%', onEnter: () => el.classList.add('in'), once: true });
+});
+
+/* Story parallax */
+gsap.to('.editorial-text', { yPercent: -10, scrollTrigger: { trigger: '#editorial', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+
+/* ===== Petal rain (final) ===== */
+const petalRain = document.getElementById('petalRain');
+const petalSymbols = ['❀','✿','✦','✧','☽','✶','❁'];
+for (let i = 0; i < 28; i++){
+  const s = document.createElement('span');
+  s.textContent = petalSymbols[Math.floor(Math.random()*petalSymbols.length)];
+  s.style.position = 'absolute';
+  s.style.top = `${-10 - Math.random()*30}%`;
+  s.style.left = `${Math.random()*100}%`;
+  s.style.fontFamily = 'Cormorant Garamond, serif';
+  s.style.fontSize = `${14 + Math.random()*22}px`;
+  s.style.color = ['#C8B58A','#E6CFCE','#A8B8C8','#D9D2E3','#B7D5D2'][Math.floor(Math.random()*5)];
+  s.style.opacity = String(0.4 + Math.random()*0.5);
+  petalRain.appendChild(s);
+  gsap.to(s, {
+    y: `${window.innerHeight + 200}px`,
+    x: `${(Math.random() - 0.5) * 200}px`,
+    rotate: Math.random() * 720 - 360,
+    duration: 12 + Math.random()*16,
+    repeat: -1,
+    delay: -Math.random()*15,
+    ease: 'none'
+  });
+}
+</script>
+</body>
+</html>
